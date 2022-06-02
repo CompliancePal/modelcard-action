@@ -9,5 +9,5 @@ export const validator = async (content: string) => {
 
   const modelCard = new Document(content, Parsers.Yaml);
 
-  console.log(await spectral.run(modelCard));
+  return spectral.run(modelCard);
 };

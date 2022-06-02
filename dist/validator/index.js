@@ -34,6 +34,6 @@ const validator = async (content) => {
     const spectral = new spectral_core_1.Spectral();
     spectral.setRuleset(rules_1.default);
     const modelCard = new spectral_core_1.Document(content, Parsers.Yaml);
-    console.log(await spectral.run(modelCard));
+    return spectral.run(modelCard);
 };
 exports.validator = validator;

@@ -26,31 +26,41 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
 const yaml = __importStar(require("js-yaml"));
 const core = __importStar(require("@actions/core"));
+const validator_1 = require("./validator");
 const MLPROJECT_PATH = './MLproject';
-try {
-    if (fs.existsSync(MLPROJECT_PATH)) {
-        console.log('MLproject file found');
-    }
-    else {
-        throw new Error('MLproject file missing!');
-    }
-    const mlproject = yaml.load(fs.readFileSync(MLPROJECT_PATH, 'utf8'));
-    console.log('MLproject file opened');
-    const modelcard_path = mlproject.modelcard;
-    //Check that modelcard is defined in the MLproject file
-    if (!modelcard_path) {
-        throw new Error("'modelcard' property not found in MLproject file!");
-    }
+const main = async () => {
     try {
-        const modelcard = yaml.load(fs.readFileSync(modelcard_path, 'utf8'));
-        console.log('Model card file opened');
-        // Do stuff with the model card file
+        if (fs.existsSync(MLPROJECT_PATH)) {
+            console.log('MLproject file found');
+        }
+        else {
+            throw new Error('MLproject file missing!');
+        }
+        const mlproject = yaml.load(fs.readFileSync(MLPROJECT_PATH, 'utf8'));
+        console.log('MLproject file opened');
+        const modelcard_path = mlproject.modelcard;
+        //Check that modelcard is defined in the MLproject file
+        if (!modelcard_path) {
+            throw new Error("'modelcard' property not found in MLproject file!");
+        }
+        try {
+            const raw = fs.readFileSync(modelcard_path, 'utf8');
+            console.log('Model card file opened');
+            // Do stuff with the model card file
+            // Find problems
+            const diagnostics = await (0, validator_1.validator)(raw);
+            // TODO: iterate over diagnostics
+            diagnostics.forEach((problem) => {
+                console.log(problem);
+            });
+        }
+        catch (e) {
+            throw new Error('Could not open model card file!');
+        }
     }
-    catch (e) {
-        throw new Error('Could not open model card file!');
+    catch (error) {
+        if (error instanceof Error)
+            core.setFailed(error.message);
     }
-}
-catch (error) {
-    if (error instanceof Error)
-        core.setFailed(error.message);
-}
+};
+main();
