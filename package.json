@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "ncc build src/index.ts --license licenses.txt",
     "dev": "tsc -w",
+    "ncc-test": "ncc run dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

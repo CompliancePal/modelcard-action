@@ -6,6 +6,8 @@
     "strict": true,
     "declaration": false,
     "strictNullChecks": true,
-    "incremental": false
+    "incremental": false,
+    "target": "es2015",
+    "moduleResolution": "node"
   }
 }
