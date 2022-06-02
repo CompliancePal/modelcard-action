@@ -22,35 +22,18 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const fs = __importStar(require("fs"));
-const yaml = __importStar(require("js-yaml"));
-const core = __importStar(require("@actions/core"));
-const MLPROJECT_PATH = './MLproject';
-try {
-    if (fs.existsSync(MLPROJECT_PATH)) {
-        console.log('MLproject file found');
-    }
-    else {
-        throw new Error('MLproject file missing!');
-    }
-    const mlproject = yaml.load(fs.readFileSync(MLPROJECT_PATH, 'utf8'));
-    console.log('MLproject file opened');
-    const modelcard_path = mlproject.modelcard;
-    //Check that modelcard is defined in the MLproject file
-    if (!modelcard_path) {
-        throw new Error("'modelcard' property not found in MLproject file!");
-    }
-    try {
-        const modelcard = yaml.load(fs.readFileSync(modelcard_path, 'utf8'));
-        console.log('Model card file opened');
-        // Do stuff with the model card file
-    }
-    catch (e) {
-        throw new Error('Could not open model card file!');
-    }
-}
-catch (error) {
-    if (error instanceof Error)
-        core.setFailed(error.message);
-}
+exports.validator = void 0;
+const spectral_core_1 = require("@stoplight/spectral-core");
+const Parsers = __importStar(require("@stoplight/spectral-parsers"));
+const rules_1 = __importDefault(require("./rules"));
+const validator = async (content) => {
+    const spectral = new spectral_core_1.Spectral();
+    spectral.setRuleset(rules_1.default);
+    const modelCard = new spectral_core_1.Document(content, Parsers.Yaml);
+    console.log(await spectral.run(modelCard));
+};
+exports.validator = validator;
