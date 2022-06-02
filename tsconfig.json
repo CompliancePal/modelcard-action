@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "declaration": false,
+    "strictNullChecks": true,
+    "incremental": false,
+    "target": "es2015",
+    "moduleResolution": "node"
+  }
+}

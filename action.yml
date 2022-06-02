@@ -1,0 +1,5 @@
+name: 'modelcard-action'
+description: 'Check that the project has an appropriate model card'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
