@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "lib": [
+      "ESNext"
+    ],
     "rootDir": "src",
     "outDir": "dist",
     "forceConsistentCasingInFileNames": true,
@@ -7,7 +10,8 @@
     "declaration": false,
     "strictNullChecks": true,
     "incremental": false,
-    "target": "es2015",
-    "moduleResolution": "node"
+    "module": "commonjs",
+    "target": "esnext",
+    "esModuleInterop": true
   }
 }
