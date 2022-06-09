@@ -1,2 +1,6 @@
 node_modules
-dist/
+dist
+
+# Files for testing the script locally
+test
+MLproject

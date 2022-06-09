@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/index.js",
     "build": "tsc",
     "dev": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -28,6 +29,7 @@
     "@stoplight/spectral-core": "^1.12.2",
     "@stoplight/spectral-functions": "^1.6.1",
     "@stoplight/spectral-parsers": "^1.0.1",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "markdownlint": "^0.25.1"
   }
 }
