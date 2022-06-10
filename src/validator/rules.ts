@@ -1,16 +1,9 @@
-import { truthy } from '@stoplight/spectral-functions';
 import markdownValidator from '../functions/markdownValidator';
+import { RulesetDefinition } from '@stoplight/spectral-core';
 
-const rules = {
+const rules: RulesetDefinition = {
   // TODO: The rules should be fixed. (This a dummy set)
   rules: {
-    'no-empty-description': {
-      given: '$..description',
-      message: 'Description must not be empty',
-      then: {
-        function: truthy,
-      },
-    },
     'valid-markdown': {
       given: '$..description',
       message: '{{error}}',
