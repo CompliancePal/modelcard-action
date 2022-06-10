@@ -5,8 +5,10 @@ If you want to have custom rules in addition to the default ones, this is possib
 1. Create a folder in your project that will contain your rules and functions. Within that folder create a file called `rules.js`.
 2. Within the file you can write your rule. Note that the file should export a function that takes one input parameter, which is the absolute path to the `rules` directory, and outputs a ruleset definition object. Here's a small example to get you started:
 ````
+const path = require('path')
+
 module.exports = (rulepath) => {
-  const custom_function = require(`${rulepath}/functions/custom-function`)
+  const custom_function = require(path.join(rulepath, 'functions', 'custom-function'))
   return {
     rules: {
       'custom-function-works': {
