@@ -9,10 +9,10 @@ import 'dotenv/config';
 const ROOT_PATH: string = process.env.GITHUB_WORKSPACE || process.cwd()
 
 const load_custom_ruleset = (): RulesetDefinition | undefined => {
-  const rulePathRelative = process.env.INPUT_RULES
+  const rulePathRelative = process.env.INPUT_RULES;
   if (rulePathRelative) {
     try {
-      const rulePathAbs = path.join(ROOT_PATH, rulePathRelative)
+      const rulePathAbs = path.join(ROOT_PATH, rulePathRelative);
       const custom_rules: RulesetDefinition = require(path.join(rulePathAbs, 'rules'))(rulePathAbs);
       return custom_rules;
     } catch (err) {
