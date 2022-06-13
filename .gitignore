@@ -1,6 +1,7 @@
 node_modules
 dist
 coverage
+.env
 
 # Files for testing the script locally
 test

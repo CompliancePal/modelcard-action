@@ -1,5 +1,17 @@
 name: 'modelcard-action'
 description: 'Check that the project has an appropriate model card'
+inputs:
+  modelcard:
+    description: Modelcard file to be analyzed
+    required: true
+    default: modelcard.yaml
+  rules:
+    description: path to rules folder
+    require: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.modelcard }}
+    - ${{ inputs.rules }}
+    - ${{ inputs.disable_default }}
