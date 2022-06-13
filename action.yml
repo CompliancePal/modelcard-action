@@ -3,15 +3,21 @@ description: Relative path from the project root to the target model card .yaml 
 inputs:
   modelcard:
     description: Modelcard file to be analyzed
+    type: string
     required: true
     default: modelcard.yaml
   rules:
     description: Relative path to the folder containing custom rules
+    type: string
     require: false
+  disable_default_rules:
+    description: If set to true and custom rules are defined, completely disables all default rules
+    require: false
+    type: boolean
 runs:
   using: docker
   image: Dockerfile
   args:
     - ${{ inputs.modelcard }}
     - ${{ inputs.rules }}
-    - ${{ inputs.disable_default }}
+    - ${{ inputs.disable_default_rules }}
