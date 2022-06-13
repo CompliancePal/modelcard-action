@@ -1,16 +1,16 @@
-name: 'modelcard-action'
-description: 'Check that the project has an appropriate model card'
+name: modelcard-action
+description: Relative path from the project root to the target model card .yaml file
 inputs:
   modelcard:
     description: Modelcard file to be analyzed
     required: true
     default: modelcard.yaml
   rules:
-    description: path to rules folder
+    description: Relative path to the folder containing custom rules
     require: false
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: docker
+  image: Dockerfile
   args:
     - ${{ inputs.modelcard }}
     - ${{ inputs.rules }}
