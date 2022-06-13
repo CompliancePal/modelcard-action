@@ -30,16 +30,11 @@ jobs:
 
 The action accepts several different input parameters. 
 
-### Required
-
-* **modelcard**
-  * Description:  Relative path from the project root to the target model card .yaml file.
-  * default: `modelcard.yaml`
-
-### Optional
-
-* **rules** 
-  * Description: Relative path to the folder containing custom rules.
+| Name | Type | Required | Description |
+| ---- | :--: | :------: | ----------- |
+| modelcard | string | true | Relative path from the project root to the target model card .yaml file.
+| rules | string | false | Relative path to the folder containing custom rules.
+| disable_default_rules | boolean | false | If set to true and custom rules are defined, completely disables all default rules.
 
 ## Adding custom rules
 If you want to have custom rules in addition to the default ones, this is possible by using JavaScript. The application uses [Spectral](https://meta.stoplight.io/docs/spectral) to validate YAML files and has been configured to enable [custom rulesets](https://meta.stoplight.io/docs/spectral/e5b9616d6d50c-custom-rulesets). Here's how to add your own rules:

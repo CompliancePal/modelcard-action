@@ -4,7 +4,7 @@ import rules from './rules';
 
 export const validator = async (content: string, customRules?: RulesetDefinition) => {
   const spectral = new Spectral();
-  const disable_default: boolean = process.env.INPUT_DISABLE_DEFAULT_RULES?.toLowerCase() === 'true'
+  const disable_default: boolean = process.env.INPUT_DISABLE_DEFAULT_RULES?.toLowerCase() === 'true';
   if (customRules){
     if (disable_default) {
       spectral.setRuleset(customRules);
