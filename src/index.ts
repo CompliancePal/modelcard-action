@@ -42,7 +42,13 @@ const main = async () => {
 
   // TODO: iterate over diagnostics
 
-  const octokit = github.getOctokit(core.getInput('token'));
+  const token = process.env.TOKEN;
+
+  if (!token) {
+    return core.setFailed('No TOKEN provided');
+  }
+
+  const octokit = github.getOctokit(token);
 
   const summary = diagnostics
     .map((problem) => {
