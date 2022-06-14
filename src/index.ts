@@ -58,17 +58,22 @@ const main = async () => {
     .join('\n');
 
   try {
-    await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
-      owner: github.context.repo.owner,
-      repo: github.context.repo.repo,
-      head_sha: github.context.sha,
-      name: 'modelcard',
-      conclusion: diagnostics.length > 0 ? 'failure' : 'success',
-      output: {
-        title: 'Validation problems',
-        summary,
+    const result = await octokit.request(
+      'POST /repos/{owner}/{repo}/check-runs',
+      {
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        head_sha: github.context.sha,
+        name: 'modelcard',
+        conclusion: diagnostics.length > 0 ? 'failure' : 'success',
+        output: {
+          title: 'Validation problems',
+          summary,
+        },
       },
-    });
+    );
+
+    console.log(result);
   } catch (e) {
     console.log(e);
   }
