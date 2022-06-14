@@ -74,6 +74,7 @@ const main = async () => {
     );
 
     console.log(result);
+    console.log(JSON.stringify(github.context, null, 2));
   } catch (e) {
     console.log(e);
   }
