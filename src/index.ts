@@ -63,7 +63,7 @@ const main = async () => {
       {
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
-        head_sha: github.context.sha,
+        head_sha: github.context.payload.pull_request!.head.sha,
         name: 'modelcard',
         conclusion: diagnostics.length > 0 ? 'failure' : 'success',
         output: {
