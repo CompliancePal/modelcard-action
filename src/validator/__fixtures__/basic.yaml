@@ -1,0 +1,19 @@
+schema_version: http://json-schema.org/draft-07/schema#
+model_details:
+  name: 'Facial Detection'
+  version:
+    id: 0.0.0
+    date: 2022-06-01
+  description: |
+    <!-- markdown description of model -->
+    ## Face Detection
+    The model analyzed in this card detects one or more faces within an image or a video frame, and returns a box around each face along with the location of the faces' major landmarks. The model's goal is exclusively to identify the existence and location of faces in an image. It does not attempt to discover identities or demographics.
+model_parameters:
+  model_architecture: test
+  data:
+    - name: training
+      description: No further description provided
+    - name: testing
+      description: No further description provided
+  performance_metrics:
+    raw: https://modelcards.withgoogle.com/assets/files/Face_Detection_Model-Card-all_chart_data.tsv
