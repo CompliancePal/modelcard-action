@@ -1,11 +1,11 @@
 import * as fs from 'fs';
-import * as yaml from 'js-yaml';
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 import { RulesetDefinition } from '@stoplight/spectral-core';
 import { validator } from './validator';
 import path from 'path';
 import 'dotenv/config';
+import { makeSummary } from './helpers/check';
 
 const ROOT_PATH: string = process.env.GITHUB_WORKSPACE || process.cwd();
 
@@ -27,20 +27,20 @@ const load_custom_ruleset = (): RulesetDefinition | undefined => {
 };
 
 const main = async () => {
+  const started_at = new Date().toISOString();
+
   if (!process.env.INPUT_MODELCARD) {
     throw new Error('Environment variable INPUT_MODELCARD not found!');
   }
 
   const raw = fs.readFileSync(process.env.INPUT_MODELCARD, 'utf8');
-  console.log('Model card file opened');
+  core.info('Model card file opened');
 
   //Use custom ruleset if one is defined
   const custom_rules: RulesetDefinition | undefined = load_custom_ruleset();
 
   // Find problems
   const diagnostics = await validator(raw, custom_rules);
-
-  // TODO: iterate over diagnostics
 
   const token = process.env.TOKEN;
 
@@ -50,33 +50,22 @@ const main = async () => {
 
   const octokit = github.getOctokit(token);
 
-  const summary = diagnostics
-    .map((problem) => {
-      console.log(problem);
-      return `- \`${problem.path.join('.')}\``;
-    })
-    .join('\n');
-
   try {
-    const result = await octokit.request(
-      'POST /repos/{owner}/{repo}/check-runs',
-      {
-        owner: github.context.repo.owner,
-        repo: github.context.repo.repo,
-        head_sha: github.context.payload.pull_request!.head.sha,
-        name: 'modelcard',
-        conclusion: diagnostics.length > 0 ? 'failure' : 'success',
-        output: {
-          title: 'Validation problems',
-          summary,
-        },
+    await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
+      owner: github.context.repo.owner,
+      repo: github.context.repo.repo,
+      head_sha: github.context.payload.pull_request!.head.sha,
+      name: 'modelcard validation',
+      conclusion: diagnostics.length > 0 ? 'failure' : 'success',
+      output: {
+        title: 'Validation problems',
+        summary: makeSummary(diagnostics),
       },
-    );
-
-    console.log(result);
-    console.log(JSON.stringify(github.context, null, 2));
+      started_at,
+      completed_at: new Date().toISOString(),
+    });
   } catch (e) {
-    console.log(e);
+    return core.setFailed('Could not create Check result');
   }
 };
 
