@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 import * as core from '@actions/core';
-import * as github from '@actions/github';
 import { RulesetDefinition } from '@stoplight/spectral-core';
 import { validator } from './validator';
 import path from 'path';
