@@ -5,7 +5,7 @@ import { RulesetDefinition } from '@stoplight/spectral-core';
 import { validator } from './validator';
 import path from 'path';
 import 'dotenv/config';
-import { makeSummary } from './helpers/check';
+import { makeCheckRun } from './helpers/check';
 
 const ROOT_PATH: string = process.env.GITHUB_WORKSPACE || process.cwd();
 
@@ -48,21 +48,10 @@ const main = async () => {
     return core.setFailed('No TOKEN provided');
   }
 
-  const octokit = github.getOctokit(token);
-
   try {
-    await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
-      owner: github.context.repo.owner,
-      repo: github.context.repo.repo,
-      head_sha: github.context.payload.pull_request!.head.sha,
-      name: 'modelcard validation',
-      conclusion: diagnostics.length > 0 ? 'failure' : 'success',
-      output: {
-        title: 'Validation problems',
-        summary: makeSummary(diagnostics),
-      },
+    await makeCheckRun(diagnostics, {
+      token,
       started_at,
-      completed_at: new Date().toISOString(),
     });
   } catch (e) {
     return core.setFailed('Could not create Check result');
