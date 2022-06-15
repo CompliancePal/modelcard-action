@@ -1,0 +1,19 @@
+name: test
+on:
+  pull_request: {}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      CI: 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v2.2.0
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm install
+      - name: test
+        run: npm test
