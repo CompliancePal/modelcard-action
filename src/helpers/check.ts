@@ -25,7 +25,10 @@ export const makeCheckRun = (
   return octokit.request('POST /repos/{owner}/{repo}/check-runs', {
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
-    head_sha: github.context.payload.pull_request!.head.sha,
+    head_sha:
+      github.context.eventName === 'pull_request'
+        ? github.context.payload.pull_request!.head.sha
+        : github.context.sha,
     name: 'modelcard validation',
     conclusion: getConclusion(diagnostics),
     output: {

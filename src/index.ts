@@ -43,9 +43,9 @@ const main = async () => {
 
   const token = process.env.TOKEN;
 
-  if (process.env.LOCAL_DEV==='true') {
-    console.log(diagnostics.length)
-    diagnostics.forEach(d => console.log(d))
+  if (process.env.LOCAL_DEV === 'true') {
+    console.log(diagnostics.length);
+    diagnostics.forEach((d) => console.log(d));
     return;
   }
 
@@ -59,6 +59,7 @@ const main = async () => {
       started_at,
     });
   } catch (e) {
+    console.log(e);
     return core.setFailed('Could not create Check result');
   }
 };
