@@ -10,7 +10,7 @@ const makeSummary = (diagnostics: ISpectralDiagnostic[]) =>
     .join('\n');
 
 // TODO: Determine a more elaborate mode reaching the conlcusion based on the severity of the diagnostics
-const getConslusion = (diagnostics: ISpectralDiagnostic[]) =>
+const getConclusion = (diagnostics: ISpectralDiagnostic[]) =>
   diagnostics.length > 0 ? 'failure' : 'success';
 
 export const makeCheckRun = (
@@ -27,7 +27,7 @@ export const makeCheckRun = (
     repo: github.context.repo.repo,
     head_sha: github.context.payload.pull_request!.head.sha,
     name: 'modelcard validation',
-    conclusion: getConslusion(diagnostics),
+    conclusion: getConclusion(diagnostics),
     output: {
       title: 'Validation problems',
       summary: makeSummary(diagnostics),

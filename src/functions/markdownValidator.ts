@@ -1,24 +1,30 @@
-import markdownlint from 'markdownlint'
+import markdownlint from 'markdownlint';
 
 export default (input: string) => {
   const options = {
-    'strings': {
-      'input': input,
+    strings: {
+      input: input,
+    },
+    config: {
+      default: true,
+      MD013: false,
     },
   };
-  
-  let resString: string = ''
+
+  let resString: string = '';
   markdownlint(options, (err, res) => {
     if (!err && res && res.toString()) {
       resString = res.toString();
     } else if (err) {
-      console.log('ERROR',err)
+      console.log('ERROR', err);
     }
-  })
+  });
 
-  return [
-    {
-      message: resString,
-    },
-  ];
+  if (resString !== '') {
+    return [
+      {
+        message: resString,
+      },
+    ];
+  }
 };
