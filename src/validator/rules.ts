@@ -18,7 +18,7 @@ const rules: RulesetDefinition = {
       then: {
         function: schema,
         functionOptions: {
-          schema: require('./schemas/modelcard-v0.0.2.json'),
+          schema: require('../../resources/schemas/modelcard-v0.0.2.json'),
           dialect: 'draft7',
         },
       },
