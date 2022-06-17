@@ -12,13 +12,13 @@ export default (input: string) => {
   };
 
   let resString: string = '';
-  markdownlint(options, (err, res) => {
-    if (!err && res && res.toString()) {
-      resString = res.toString();
-    } else if (err) {
-      console.log('ERROR', err);
-    }
-  });
+
+  //Switch to sync version
+  const res = markdownlint.sync(options);
+
+  if (res && res.toString()) {
+    resString = res.toString();
+  }
 
   if (resString !== '') {
     return [
