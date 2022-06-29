@@ -5,7 +5,7 @@ const makeSummary = (diagnostics: ISpectralDiagnostic[]) =>
   diagnostics
     .map((problem) => {
       console.log(problem);
-      return `- \`${problem.path.join('.')}\``;
+      return `- \`${problem.path.join('.')}\`: ${problem.message}`;
     })
     .join('\n');
 
