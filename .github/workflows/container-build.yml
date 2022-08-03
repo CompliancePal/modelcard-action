@@ -3,7 +3,7 @@ name: Build & Deploy Container
 on:
   push:
     branches:
-      - master
+      - main
     tags:
       - 'v*'
   workflow_dispatch: {}
@@ -11,9 +11,6 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-
-permissions:
-  packages: write
 
 jobs:
   build-and-push-image:
