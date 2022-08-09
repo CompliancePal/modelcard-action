@@ -2,6 +2,7 @@ node_modules
 dist
 coverage
 .env
+.vscode
 
 # Files for testing the script locally
 test
