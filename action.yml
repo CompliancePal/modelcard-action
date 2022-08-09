@@ -16,7 +16,7 @@ inputs:
     type: boolean
 runs:
   using: docker
-  image: 'docker://ghcr.io/compliancepal/modelcard-action'
+  image: 'docker://ghcr.io/compliancepal/modelcard-action:1.0.0'
   args:
     - ${{ inputs.modelcard }}
     - ${{ inputs.rules }}
