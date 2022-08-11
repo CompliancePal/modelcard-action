@@ -16,7 +16,7 @@ export const renderModelCard = (metadata: string) => {
   const modelcard = load(metadata) as object;
 
   nunjucks
-    .configure(join(__dirname, 'templates'), {
+    .configure(join(__dirname, '../../resources/templates'), {
       autoescape: true,
     })
     .addFilter(
