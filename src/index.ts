@@ -55,6 +55,7 @@ const main = async () => {
 
   try {
     await makeCheckRun(diagnostics, {
+      metadata: raw,
       token,
       started_at,
     });

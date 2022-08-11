@@ -1,7 +1,10 @@
 import * as github from '@actions/github';
 import { ISpectralDiagnostic } from '@stoplight/spectral-core';
+import nunjucks from 'nunjucks';
+import { load } from 'js-yaml';
+import { join } from 'path';
 
-const makeSummary = (diagnostics: ISpectralDiagnostic[]) =>
+const makeDiagnosticsSummary = (diagnostics: ISpectralDiagnostic[]) =>
   diagnostics
     .map((problem) => {
       console.log(problem);
@@ -9,13 +12,39 @@ const makeSummary = (diagnostics: ISpectralDiagnostic[]) =>
     })
     .join('\n');
 
+export const renderModelCard = (metadata: string) => {
+  const modelcard = load(metadata) as object;
+
+  nunjucks.configure(join(__dirname, 'templates'), {
+    autoescape: true,
+  });
+
+  return nunjucks.render('dummy.njk', modelcard).trim();
+};
+
 // TODO: Determine a more elaborate mode reaching the conlcusion based on the severity of the diagnostics
 const getConclusion = (diagnostics: ISpectralDiagnostic[]) =>
   diagnostics.length > 0 ? 'failure' : 'success';
 
+export const makeOutput = (
+  diagnostics: ISpectralDiagnostic[],
+  metadata: string,
+) => {
+  return diagnostics.length > 0
+    ? {
+        title: 'Validation problems',
+        summary: makeDiagnosticsSummary(diagnostics),
+      }
+    : {
+        title: 'Model cards',
+        summary: renderModelCard(metadata),
+      };
+};
+
 export const makeCheckRun = (
   diagnostics: ISpectralDiagnostic[],
   opts: {
+    metadata: string;
     token: string;
     started_at: string;
   },
@@ -31,10 +60,7 @@ export const makeCheckRun = (
         : github.context.sha,
     name: 'modelcard validation',
     conclusion: getConclusion(diagnostics),
-    output: {
-      title: 'Validation problems',
-      summary: makeSummary(diagnostics),
-    },
+    output: makeOutput(diagnostics, opts.metadata),
     started_at: opts.started_at,
     completed_at: new Date().toISOString(),
   });
