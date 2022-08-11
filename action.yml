@@ -16,7 +16,7 @@ inputs:
     type: boolean
 runs:
   using: docker
-  image: 'docker://ghcr.io/compliancepal/modelcard-action:1.0.0'
+  image: 'docker://ghcr.io/compliancepal/modelcard-action:vstirbu-patch-1'
   args:
     - ${{ inputs.modelcard }}
     - ${{ inputs.rules }}
