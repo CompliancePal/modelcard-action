@@ -32,7 +32,7 @@ describe('Checks', () => {
 
 Name: Facial Detection 
 Version: v0.0.0
-Date: Wed Jun 01 2022 03:00:00 GMT+0300 (Eastern European Summer Time)
+Date: 1-6-2022
 
 ### Description
 

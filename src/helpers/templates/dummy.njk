@@ -2,7 +2,7 @@
 
 Name: {{ model_details.name }} 
 Version: v{{ model_details.version.id }}
-Date: {{ model_details.version.date }}
+Date: {{ model_details.version.date | date }}
 
 ### Description
 {# HACK: replace('# ', '### ') is a hack to normalize the headers, shifts the headers in the markdown strings with the level where they are rendered in the template. Should be implemneted properly with a filter #}

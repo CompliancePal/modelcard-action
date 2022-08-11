@@ -15,9 +15,17 @@ const makeDiagnosticsSummary = (diagnostics: ISpectralDiagnostic[]) =>
 export const renderModelCard = (metadata: string) => {
   const modelcard = load(metadata) as object;
 
-  nunjucks.configure(join(__dirname, 'templates'), {
-    autoescape: true,
-  });
+  nunjucks
+    .configure(join(__dirname, 'templates'), {
+      autoescape: true,
+    })
+    .addFilter(
+      'date',
+      (date: Date) =>
+        `${date.getUTCDate()}-${
+          date.getUTCMonth() + 1
+        }-${date.getUTCFullYear()}`,
+    );
 
   return nunjucks.render('dummy.njk', modelcard).trim();
 };
