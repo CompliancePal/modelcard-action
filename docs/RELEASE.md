@@ -36,7 +36,7 @@ gitGraph
 ### Release procedure
 
 1. The commit is tagged with the new version `v{major}.{minor}.{patch}`.
-2. The tag event triggers the workflow that moves the `v{major}` tag to the commit.
+2. The tag event triggers the workflow that creates a release from that tag and moves the `v{major}` tag to the commit.
 
 ```mermaid
 gitGraph
