@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "ESNext"
-    ],
+    "lib": ["ESNext"],
     "rootDir": "src",
     "outDir": "dist",
     "forceConsistentCasingInFileNames": true,
@@ -10,7 +8,7 @@
     "declaration": false,
     "strictNullChecks": true,
     "incremental": false,
-    "module": "commonjs",
+    "module": "NodeNext",
     "target": "esnext",
     "esModuleInterop": true
   }

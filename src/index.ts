@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as core from '@actions/core';
 import { RulesetDefinition, Ruleset } from '@stoplight/spectral-core';
-import { bundleAndLoadRuleset } from '@stoplight/spectral-ruleset-bundler/dist/loader/node';
+import { bundleAndLoadRuleset } from '@stoplight/spectral-ruleset-bundler/with-loader';
 import * as spectralRuntime from '@stoplight/spectral-runtime';
 import { validator } from './validator';
 import path from 'path';
