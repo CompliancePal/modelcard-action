@@ -9,6 +9,18 @@ describe('Custom rules', () => {
         await loadCustomRuleset(process.cwd() + '/resources/rules/rules.yaml');
 
       expect(custom_rules).not.toBeUndefined();
+
+      expect(custom_rules).toMatchObject({
+        rules: {
+          'legal-version-name': {
+            message: '{{error}}',
+            given: '$.model_details.version.name',
+            then: {
+              function: expect.any(Function),
+            },
+          },
+        },
+      });
     });
 
     it('returns undefined on bad path', async () => {
