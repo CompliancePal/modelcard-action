@@ -6,7 +6,7 @@ describe('Custom rules', () => {
     it('loads custom rules', async () => {
       process.cwd();
       const custom_rules: RulesetDefinition | undefined =
-        await loadCustomRuleset(process.cwd() + '/resources/rules/rules.yaml');
+        await loadCustomRuleset(process.cwd() + '/src/rules/rules.yaml');
 
       expect(custom_rules).not.toBeUndefined();
 
