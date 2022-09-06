@@ -3,7 +3,7 @@ import * as core from '@actions/core';
 import { RulesetDefinition } from '@stoplight/spectral-core';
 import { validator } from './validator';
 import 'dotenv/config';
-import { makeCheckRun } from './helpers/check';
+import { makeCheckRun, makeOutput } from './helpers/check';
 import loadCustomRuleset from './helpers/rule-loader';
 import path from 'path';
 

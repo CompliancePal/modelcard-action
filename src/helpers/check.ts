@@ -4,11 +4,35 @@ import nunjucks from 'nunjucks';
 import { load } from 'js-yaml';
 import { join } from 'path';
 
+const severity = {
+  0: {
+    name: 'ERROR',
+    color: 'red',
+  },
+  1: {
+    name: 'WARNING',
+    color: 'yellow',
+  },
+  2: {
+    name: 'INFO',
+    color: 'blue',
+  },
+  3: {
+    name: 'HINT',
+    color: 'green',
+  },
+};
+
 const makeDiagnosticsSummary = (diagnostics: ISpectralDiagnostic[]) =>
   diagnostics
+    .sort((a, b) => a.severity - b.severity)
     .map((problem) => {
-      console.log(problem);
-      return `- \`${problem.path.join('.')}\``;
+      console.log('PROBLEM:', problem);
+      const str = `- **${
+        severity[problem.severity].name
+      }** at \`${problem.path.join('.')}\`: ${problem.message}`;
+      console.log(`Formatted string: ${str}`);
+      return str;
     })
     .join('\n');
 
