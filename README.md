@@ -71,3 +71,9 @@ module.exports = input => {
 };
 ````
 4. Then the github action still needs to know where to look for the `rules.js` file. This is achieved by giving a _rules_ parameter as input to the action. Just add `rules: {path}` to your workflow file, where `path` is the relative path from the project root to the rules directory, for example in the format `.modelcard/rules` (in which case the complete path to `rules.js` would be `{repo_root}/.modelcard/rules/rules.js`). 
+
+## Background
+
+### Publications
+
+* V. Stirbu, M. Raatikainen, J. Röntynen, V. Sokolov, T. Lehtonen and T. Mikkonen, "Toward Multiconcern Software Development With Everything as Code," in IEEE Software, vol. 39, no. 4, pp. 27-33, July-Aug. 2022, doi: [10.1109/MS.2022.3167481](https://doi.org/10.1109/MS.2022.3167481).
