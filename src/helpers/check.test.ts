@@ -61,7 +61,7 @@ The model analyzed in this card detects one or more faces within an image or a v
         const res = makeOutput(errors, '');
 
         expect(res.summary).toBe(
-          '- **WARNING** at `quantitative_analysis.performance_metrics`: "performance_metrics" property type must be array',
+          '- :warning: `quantitative_analysis.performance_metrics`: "performance_metrics" property type must be array',
         );
       });
     });
