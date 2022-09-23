@@ -23,7 +23,7 @@ const severity = {
   3: {
     name: 'HINT',
     color: 'green',
-    emojiString: ':point_up:',
+    emojiString: ':bulb:',
   },
 };
 
@@ -31,12 +31,9 @@ const makeDiagnosticsSummary = (diagnostics: ISpectralDiagnostic[]) =>
   diagnostics
     .sort((a, b) => a.severity - b.severity)
     .map((problem) => {
-      console.log('PROBLEM:', problem);
-      const str = `- **${severity[problem.severity].name}** ${
-        severity[problem.severity].emojiString
-      } at \`${problem.path.join('.')}\`: ${problem.message}`;
-      console.log(`Formatted string: ${str}`);
-      return str;
+      return `- ${severity[problem.severity].emojiString} \`${problem.path.join(
+        '.',
+      )}\`: ${problem.message}`;
     })
     .join('\n');
 

@@ -28,6 +28,7 @@ const main = async () => {
 
   // Find problems
   const diagnostics = await validator(raw, custom_rules);
+  diagnostics.length > 0 && console.log(makeOutput(diagnostics, ''));
 
   const token = process.env.TOKEN;
 
