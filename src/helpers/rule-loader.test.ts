@@ -1,6 +1,6 @@
 import loadCustomRuleset from './rule-loader';
 import { RulesetDefinition } from '@stoplight/spectral-core';
-// /Users/hgmarkus/uh-work/modelcard-action/
+
 describe('Custom rules', () => {
   describe('Rule loader', () => {
     it('loads custom rules', async () => {

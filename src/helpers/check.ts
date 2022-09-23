@@ -4,11 +4,36 @@ import nunjucks from 'nunjucks';
 import { load } from 'js-yaml';
 import { join } from 'path';
 
+const severity = {
+  0: {
+    name: 'ERROR',
+    color: 'red',
+    emojiString: ':x:',
+  },
+  1: {
+    name: 'WARNING',
+    color: 'yellow',
+    emojiString: ':warning:',
+  },
+  2: {
+    name: 'INFO',
+    color: 'blue',
+    emojiString: ':information_source:',
+  },
+  3: {
+    name: 'HINT',
+    color: 'green',
+    emojiString: ':bulb:',
+  },
+};
+
 const makeDiagnosticsSummary = (diagnostics: ISpectralDiagnostic[]) =>
   diagnostics
+    .sort((a, b) => a.severity - b.severity)
     .map((problem) => {
-      console.log(problem);
-      return `- \`${problem.path.join('.')}\``;
+      return `- ${severity[problem.severity].emojiString} \`${problem.path.join(
+        '.',
+      )}\`: ${problem.message}`;
     })
     .join('\n');
 
