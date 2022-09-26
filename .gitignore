@@ -1,8 +1,13 @@
+# General
 node_modules
 dist
 coverage
 .env
 .vscode
+
+# Docs
+.docusaurus
+build
 
 # Files for testing the script locally
 test
