@@ -12,7 +12,8 @@ import { Scope, Tree } from '@stoplight/spectral-ruleset-migrator/dist/tree';
 import { process } from '@stoplight/spectral-ruleset-migrator/dist';
 import { assertRuleset } from '@stoplight/spectral-ruleset-migrator/dist/validation';
 import { Ruleset } from '@stoplight/spectral-ruleset-migrator/dist/validation/types';
-import transformers from './transformers/index';
+import transformers from '@stoplight/spectral-ruleset-migrator/dist/transformers';
+import rules from './transformers/rules';
 
 async function read(
   filepath: string,
@@ -61,7 +62,7 @@ export async function migrateRuleset(
     read,
   };
 
-  for (const transformer of transformers) {
+  for (const transformer of [...transformers, rules]) {
     transformer(ctx.hooks);
   }
 
