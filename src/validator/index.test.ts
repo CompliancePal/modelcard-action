@@ -25,7 +25,7 @@ describe('validator', () => {
       join(__dirname, '__fixtures__/ruleset.yaml'),
     );
 
-    const res = await validator(content, ruleset).catch(console.log);
+    const res = await validator(content, ruleset);
 
     expect(res).toHaveLength(0);
   });
