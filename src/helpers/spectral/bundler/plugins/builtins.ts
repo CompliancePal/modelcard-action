@@ -6,6 +6,7 @@ import * as refResolver from '@stoplight/spectral-ref-resolver';
 import * as rulesets from '@stoplight/spectral-rulesets';
 import * as runtime from '@stoplight/spectral-runtime';
 import type { Plugin, InputOptions } from 'rollup';
+import markdownTemplate from '../../../../functions/markdownTemplate';
 
 type Module =
   | 'core'
@@ -15,7 +16,10 @@ type Module =
   | 'ref-resolver'
   | 'rulesets'
   | 'runtime';
-type GlobalModules = Record<`@stoplight/spectral-${Module}`, string>;
+type GlobalModules = Record<
+  `@stoplight/spectral-${Module}` | '@compliancepal/spectral-functions',
+  string
+>;
 type Overrides = Record<keyof GlobalModules, Record<string, unknown>>;
 
 const NAME = '@stoplight-spectral/builtins';
@@ -84,6 +88,14 @@ export const builtins = (overrides: Partial<Overrides> = {}): Plugin => {
       instanceId,
       '@stoplight/spectral-runtime',
       runtime,
+      overrides,
+    ),
+    registerModule(
+      instanceId,
+      '@compliancepal/spectral-functions',
+      {
+        template: markdownTemplate,
+      },
       overrides,
     ),
   ]) as GlobalModules;

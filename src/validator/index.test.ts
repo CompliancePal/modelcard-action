@@ -1,6 +1,7 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { validator } from '.';
+import loadCustomRuleset from '../helpers/rule-loader';
 
 describe('validator', () => {
   test('valid model card schema', async () => {
@@ -10,6 +11,21 @@ describe('validator', () => {
     );
 
     const res = await validator(content);
+
+    expect(res).toHaveLength(0);
+  });
+
+  test('valid model card schema with custom rules', async () => {
+    const content = readFileSync(
+      join(__dirname, '__fixtures__/basic.yaml'),
+      'utf-8',
+    );
+
+    const ruleset = await loadCustomRuleset(
+      join(__dirname, '__fixtures__/ruleset.yaml'),
+    );
+
+    const res = await validator(content, ruleset).catch(console.log);
 
     expect(res).toHaveLength(0);
   });
