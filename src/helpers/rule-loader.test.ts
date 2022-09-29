@@ -1,12 +1,12 @@
 import loadCustomRuleset from './rule-loader';
 import { RulesetDefinition } from '@stoplight/spectral-core';
+import { join } from 'path';
 
 describe('Custom rules', () => {
   describe('Rule loader', () => {
     it('loads custom rules', async () => {
-      process.cwd();
       const custom_rules: RulesetDefinition | undefined =
-        await loadCustomRuleset(process.cwd() + '/src/rules/rules.yaml');
+        await loadCustomRuleset(join(__dirname, '__fixtures__/rules.yaml'));
 
       expect(custom_rules).not.toBeUndefined();
 
@@ -24,7 +24,6 @@ describe('Custom rules', () => {
     });
 
     it('returns undefined on bad path', async () => {
-      process.cwd();
       const custom_rules: RulesetDefinition | undefined =
         await loadCustomRuleset('bad path');
 
