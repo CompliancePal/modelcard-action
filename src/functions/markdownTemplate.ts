@@ -52,9 +52,8 @@ ${template}
 
 Missing sections:
 
-${missing.map((header) => {
-  return `- ${header.title}\n`;
-})}`,
+${missing.map((header) => `- ${header.title}`).join('\n')}
+`,
     },
   ];
 };

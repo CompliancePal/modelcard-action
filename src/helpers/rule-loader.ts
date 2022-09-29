@@ -64,7 +64,7 @@ const loadCustomRuleset = async (
     await bundle.generate({ format: 'iife', exports: 'auto' })
   ).output[0];
 
-  console.log(outputChunk.code);
+  // console.log(outputChunk.code);
 
   return new Ruleset(Function(`return ${outputChunk.code}`)(), {
     severity: 'recommended',
