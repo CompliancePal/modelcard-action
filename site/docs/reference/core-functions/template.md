@@ -1,5 +1,5 @@
 ---
-sidebar_label: markdownTemplate
+sidebar_label: template
 ---
 
 # Markdown template
@@ -10,14 +10,15 @@ This function validates that a markdown formatted string property conforms with 
 | -------- | --------------------------------------- | -------- | -------- |
 | template | The desired markdown formatted template | `string` | yes      |
 
-```yaml title="example"
-valid-markdown-description:
-  given: '$.model_details.description',
-  then:
-    function: markdownTemplate,
-    functionOptions:
-      template: |
-        ## First section
+```yaml title="ruleset.yaml"
+rules:
+  valid-markdown-description:
+    given: '$.model_details.description'
+    then:
+      function: template
+      functionOptions:
+        template: |
+          ## First section
 
-        ## Second section
+          ## Second section
 ```
