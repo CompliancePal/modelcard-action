@@ -1,6 +1,6 @@
 # Container image that runs your code
 FROM node:18-alpine3.14
 COPY . .
-RUN npm install
-RUN npm run build
-ENTRYPOINT ["node", "/dist/index.js"]
+RUN npm install --workspace action
+RUN npm run build --workspace action
+ENTRYPOINT ["node", "/packages/action/dist/index.js"]
