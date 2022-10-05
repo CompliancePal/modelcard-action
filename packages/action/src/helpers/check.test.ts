@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { makeOutput, renderModelCard } from './check';
-import { validator } from '../validator';
+import { validator } from '../validator/index';
 
 describe('Checks', () => {
   describe('makeOutput', () => {

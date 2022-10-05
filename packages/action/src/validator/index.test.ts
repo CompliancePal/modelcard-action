@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import { validator } from '.';
+import { validator } from './index';
 import loadCustomRuleset from '../helpers/rule-loader';
 
 describe('validator', () => {
