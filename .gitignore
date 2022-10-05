@@ -4,6 +4,7 @@ dist
 coverage
 .env
 .vscode
+.cache
 
 # Docs
 .docusaurus

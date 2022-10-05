@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf .cache packages/*/{dist,.cache}",
     "start": "node dist/index.js",
     "build": "tsc",
     "dev": "tsc -w",
@@ -21,7 +22,9 @@
   },
   "homepage": "https://github.com/CompliancePal/modelcard-action#readme",
   "workspaces": [
-    "packages/action",
-    "apps/website"
-  ]
+    "packages/action"
+  ],
+  "devDependencies": {
+    "rimraf": "^3.0.2"
+  }
 }
