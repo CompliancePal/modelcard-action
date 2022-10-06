@@ -1,7 +1,6 @@
 import * as fs from 'fs';
 import * as spectralRuntime from '@stoplight/spectral-runtime';
-import { RulesetDefinition, Ruleset } from '@stoplight/spectral-core';
-import { bundleAndLoadRuleset } from '@stoplight/spectral-ruleset-bundler/with-loader';
+import { Ruleset } from '@stoplight/spectral-core';
 import { Plugin, rollup } from 'rollup';
 import { url } from '@stoplight/spectral-ruleset-bundler/plugins/url';
 import { stdin } from '@stoplight/spectral-ruleset-bundler/plugins/stdin';
@@ -66,10 +65,17 @@ const loadCustomRuleset = async (
 
   // console.log(outputChunk.code);
 
-  return new Ruleset(Function(`return ${outputChunk.code}`)(), {
-    severity: 'recommended',
-    source: rulesetFile,
-  }).definition;
+  try {
+    return new Ruleset(Function(`return ${outputChunk.code}`)(), {
+      severity: 'recommended',
+      source: rulesetFile,
+    }).definition;
+  } catch (e) {
+    // TODO: Create better error message out of the rules validation error
+    console.log(e);
+
+    return;
+  }
 };
 
 export default loadCustomRuleset;

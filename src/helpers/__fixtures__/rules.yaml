@@ -11,3 +11,5 @@ rules:
     given: '$'
     then:
       function: template
+      functionOptions:
+        template: ''
