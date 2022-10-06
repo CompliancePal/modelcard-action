@@ -14,10 +14,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: yarn
       - run: corepack enable
       - name: Configure yarn
-        run: yarn set version
+        run: yarn set version 3.2.4
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: test
