@@ -1,0 +1,63 @@
+{
+  "name": "@compliancepal/modelcard-action",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf .cache dist",
+    "start": "node .",
+    "build": "tsc --build ./tsconfig.build.json",
+    "dev": "tsc -w",
+    "test": "jest --coverage --verbose",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CompliancePal/modelcard-action.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/CompliancePal/modelcard-action/issues"
+  },
+  "homepage": "https://github.com/CompliancePal/modelcard-action#readme",
+  "devDependencies": {
+    "@swc/core": "^1.3.5",
+    "@swc/jest": "^0.2.23",
+    "@types/jest": "^28.1.1",
+    "@types/js-yaml": "^4.0.5",
+    "@types/node": "^17.0.38",
+    "@types/node-fetch": "^2.6.2",
+    "@types/nunjucks": "^3.2.1",
+    "@types/unist": "^2.0.6",
+    "jest": "28",
+    "memfs": "^3.4.7",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^28.0.4",
+    "typescript": "^4.7.2"
+  },
+  "dependencies": {
+    "@actions/core": "^1.8.2",
+    "@actions/github": "^5.0.3",
+    "@stoplight/json": "^3.20.1",
+    "@stoplight/path": "^1.3.2",
+    "@stoplight/spectral-core": "^1.12.2",
+    "@stoplight/spectral-formats": "^1.4.0",
+    "@stoplight/spectral-functions": "^1.6.1",
+    "@stoplight/spectral-parsers": "^1.0.1",
+    "@stoplight/spectral-ref-resolver": "^1.0.2",
+    "@stoplight/spectral-ruleset-bundler": "^1.3.1",
+    "@stoplight/spectral-ruleset-migrator": "^1.7.4",
+    "@stoplight/spectral-rulesets": "^1.14.0",
+    "@stoplight/spectral-runtime": "^1.1.2",
+    "@stoplight/yaml": "^4.2.3",
+    "ast-types": "^0.14.2",
+    "dotenv": "^16.0.1",
+    "js-yaml": "^4.1.0",
+    "markdownlint": "^0.25.1",
+    "nunjucks": "^3.2.3",
+    "remark-parse": "^9.0.0",
+    "rollup": "^2.79.1",
+    "unified": "^9.2.2"
+  }
+}
