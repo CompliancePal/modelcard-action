@@ -16,6 +16,6 @@ jobs:
           node-version: 18
       - run: corepack enable
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn workspace @compliancepal/modelcard-action install --immutable
       - name: test
-        run: yarn test
+        run: yarn workspace @compliancepal/modelcard-action test
