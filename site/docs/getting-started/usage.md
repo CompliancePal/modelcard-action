@@ -33,5 +33,5 @@ The action accepts the following inputs:
 | Name                  |  Type   | Required | Description                                                                         |
 | --------------------- | :-----: | :------: | ----------------------------------------------------------------------------------- |
 | modelcard             | string  |   true   | Relative path from the project root to the target model card .yaml file.            |
-| rules                 | string  |  false   | Relative path to the folder containing custom rules.                                |
+| rules                 | string  |  false   | Relative path to the folder containing [custom rules](/guides/custom-rules).        |
 | disable_default_rules | boolean |  false   | If set to true and custom rules are defined, completely disables all default rules. |
