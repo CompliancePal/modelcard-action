@@ -5,4 +5,4 @@ COPY . .
 RUN corepack enable
 RUN yarn install
 RUN yarn build
-ENTRYPOINT ["yarn", "start"]
+ENTRYPOINT ["/app/yarn", "start"]
