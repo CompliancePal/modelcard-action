@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext"],
+    "lib": ["ES2022"],
     "rootDir": "src",
     "outDir": "dist",
     "forceConsistentCasingInFileNames": true,
@@ -9,7 +9,8 @@
     "strictNullChecks": true,
     "incremental": false,
     "module": "NodeNext",
-    "target": "esnext",
+    // same as spectral
+    "target": "ES2019",
     "esModuleInterop": true
   }
 }
