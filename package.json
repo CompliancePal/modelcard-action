@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf .cache packages/*/{dist,.cache}"
+    "clean": "rimraf .cache packages/*/{dist,.cache,coverage}"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/CompliancePal/modelcard-action#readme",
   "workspaces": [
+    "apps/site",
     "packages/action"
   ],
   "devDependencies": {
