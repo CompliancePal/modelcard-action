@@ -7,7 +7,7 @@
     },
     "test": {
       "outputs": ["coverage/**"],
-      "dependsOn": ["^test"]
+      "dependsOn": ["build", "^test"]
     },
     "dev": {
       "cache": false,
