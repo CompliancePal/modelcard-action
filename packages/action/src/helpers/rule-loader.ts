@@ -1,7 +1,6 @@
 import * as fs from 'fs';
 import * as spectralRuntime from '@stoplight/spectral-runtime';
 import { RulesetDefinition, Ruleset } from '@stoplight/spectral-core';
-import { bundleAndLoadRuleset } from '@stoplight/spectral-ruleset-bundler/with-loader';
 import { Plugin, rollup } from 'rollup';
 import { url } from '@stoplight/spectral-ruleset-bundler/plugins/url';
 import { stdin } from '@stoplight/spectral-ruleset-bundler/plugins/stdin';
@@ -28,7 +27,7 @@ const loadCustomRuleset = async (
       fetch,
     },
   },
-) => {
+): Promise<RulesetDefinition | undefined> => {
   if (!/\.(json|ya?ml)$/.test(path.extname(filepath))) {
     console.log('Only JSON and YAML rulesets are supported');
     return;

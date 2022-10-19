@@ -1,8 +1,20 @@
-import { RulesetDefinition } from '@stoplight/spectral-core';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import { validator } from '../validator/index';
+import {
+  Document,
+  Spectral,
+  RulesetDefinition,
+} from '@stoplight/spectral-core';
+import * as Parsers from '@stoplight/spectral-parsers';
 import markdownTemplate from './markdownTemplate';
+
+const validator = async (content: string, rules: RulesetDefinition) => {
+  const spectral = new Spectral();
+
+  spectral.setRuleset(rules);
+
+  return spectral.run(new Document(content, Parsers.Yaml));
+};
 
 describe('markdownTemplate', () => {
   it('valid', async () => {

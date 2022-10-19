@@ -1,6 +1,7 @@
 # Container image that runs your code
-FROM node:18-alpine3.14
+FROM node:18-alpine
+RUN apk add --no-cache libc6-compat
 COPY . .
-RUN npm install --workspace action
-RUN npm run build --workspace action
+RUN npm install
+RUN npm run build -- --filter=action
 ENTRYPOINT ["node", "/packages/action"]
