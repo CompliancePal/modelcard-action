@@ -17,7 +17,7 @@ type Module =
   | 'rulesets'
   | 'runtime';
 type GlobalModules = Record<
-  `@stoplight/spectral-${Module}` | '@compliancepal/spectral-functions',
+  `@stoplight/spectral-${Module}` | '@compliancepal/builtin-functions',
   string
 >;
 type Overrides = Record<keyof GlobalModules, Record<string, unknown>>;
@@ -51,6 +51,8 @@ function registerModule(
 
 export const builtins = (overrides: Partial<Overrides> = {}): Plugin => {
   const instanceId = Math.round(Math.random() * 1_000_000);
+
+  console.log(template);
 
   const modules = Object.fromEntries([
     registerModule(instanceId, '@stoplight/spectral-core', core, overrides),
@@ -92,7 +94,7 @@ export const builtins = (overrides: Partial<Overrides> = {}): Plugin => {
     ),
     registerModule(
       instanceId,
-      '@compliancepal/spectral-functions',
+      '@compliancepal/builtin-functions',
       {
         template,
       },

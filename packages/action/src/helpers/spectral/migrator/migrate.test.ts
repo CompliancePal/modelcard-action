@@ -24,7 +24,7 @@ describe('patched migrate', () => {
 
     expect(
       ruleset.startsWith(
-        'import {template} from "@compliancepal/spectral-functions";',
+        'import {template} from "@compliancepal/builtin-functions";',
       ),
     ).toBeTruthy();
 

@@ -1,1 +1,1 @@
-export * as template from './markdownTemplate';
+export { default as template } from './markdownTemplate';

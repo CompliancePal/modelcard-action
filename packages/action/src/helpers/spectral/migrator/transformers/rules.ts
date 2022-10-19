@@ -30,7 +30,7 @@ const transformer: Transformer = function (hooks) {
       }
 
       if (PATCHED_FUNCTIONS.includes(value)) {
-        return ctx.tree.addImport(value, '@compliancepal/spectral-functions');
+        return ctx.tree.addImport(value, '@compliancepal/builtin-functions');
       }
 
       const alias = ctx.tree.scope.load(`function-${value}`);

@@ -70,7 +70,7 @@ export default createRulesetFunction<string, { template: string }>(
       required: ['template'],
     },
   },
-  function markdownTemplate(input, options) {
+  function template(input, options) {
     const tree = processor.parse(input) as Parent;
     const structure = processor.parse(options.template) as Parent;
 
