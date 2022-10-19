@@ -26,7 +26,6 @@
     "@types/node": "^18.11.2",
     "@types/node-fetch": "^2.6.2",
     "@types/nunjucks": "^3.2.1",
-    "@types/unist": "^2.0.6",
     "jest": "^28.1.1",
     "memfs": "^3.4.7",
     "ts-jest": "^28.0.4",
@@ -54,8 +53,6 @@
     "js-yaml": "^4.1.0",
     "markdownlint": "^0.25.1",
     "nunjucks": "^3.2.3",
-    "remark-parse": "^9.0.0",
-    "rollup": "^2.79.1",
-    "unified": "^9.2.2"
+    "rollup": "^2.79.1"
   }
 }
