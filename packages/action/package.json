@@ -35,7 +35,6 @@
   "dependencies": {
     "@actions/core": "^1.8.2",
     "@actions/github": "^5.0.3",
-    "@compliancepal/spectral-functions": "*",
     "@compliancepal/spectral-rulesets": "*",
     "@stoplight/spectral-core": "^1.12.2",
     "@stoplight/spectral-parsers": "^1.0.1",
