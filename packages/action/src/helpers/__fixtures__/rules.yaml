@@ -1,0 +1,15 @@
+functions:
+  - semver
+rules:
+  legal-version-name:
+    message: '{{error}}'
+    given: '$.model_details.version.name'
+    then:
+      function: semver
+  custom-function:
+    message: '{{error}}'
+    given: '$'
+    then:
+      function: template
+      functionOptions:
+        template: ''

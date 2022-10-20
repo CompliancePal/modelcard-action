@@ -14,6 +14,6 @@ jobs:
         with:
           node-version: 18
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: test
-        run: npm test
+        run: npx turbo run test --filter action
