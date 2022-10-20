@@ -15,5 +15,7 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm ci
-      - name: test
+      - name: Build
+        run: npx turbo run build --filter action
+      - name: Test
         run: npx turbo run test --filter action
