@@ -12,11 +12,13 @@ This is a monorepo. It contains `apps` and `packages` organized as [workspaces](
 
 ### Packages
 
-| Name      | Description                                                                              |
-| --------- | ---------------------------------------------------------------------------------------- |
-| action    | The GitHub action                                                                        |
-| functions | A set of functions that facilitate advanced rules for validation of model card documents |
-| tsconfig  | Shared Typescript configurations                                                         |
+| Name         | Description                                                                              |
+| ------------ | ---------------------------------------------------------------------------------------- |
+| action       | The GitHub action                                                                        |
+| functions    | A set of functions that facilitate advanced rules for validation of model card documents |
+| jest-presets | Shared Jest presets                                                                      |
+| rulesets     | Loads the custom rulesets                                                                |
+| tsconfig     | Shared Typescript configurations                                                         |
 
 ## Development
 

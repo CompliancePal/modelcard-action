@@ -35,24 +35,14 @@
   "dependencies": {
     "@actions/core": "^1.8.2",
     "@actions/github": "^5.0.3",
-    "@stoplight/json": "^3.20.1",
-    "@stoplight/path": "^1.3.2",
+    "@compliancepal/spectral-functions": "*",
+    "@compliancepal/spectral-rulesets": "*",
     "@stoplight/spectral-core": "^1.12.2",
-    "@stoplight/spectral-formats": "^1.4.0",
-    "@stoplight/spectral-functions": "^1.6.1",
     "@stoplight/spectral-parsers": "^1.0.1",
-    "@stoplight/spectral-ref-resolver": "^1.0.2",
-    "@stoplight/spectral-ruleset-bundler": "^1.3.2",
-    "@stoplight/spectral-ruleset-migrator": "^1.7.4",
-    "@stoplight/spectral-rulesets": "^1.14.1",
-    "@stoplight/spectral-runtime": "^1.1.2",
-    "@stoplight/yaml": "^4.2.3",
     "ast-types": "^0.14.2",
     "dotenv": "^16.0.1",
-    "@compliancepal/spectral-functions": "*",
     "js-yaml": "^4.1.0",
     "markdownlint": "^0.25.1",
-    "nunjucks": "^3.2.3",
-    "rollup": "^2.79.1"
+    "nunjucks": "^3.2.3"
   }
 }

@@ -7,8 +7,8 @@ import { stdin } from '@stoplight/spectral-ruleset-bundler/plugins/stdin';
 import { IO } from '@stoplight/spectral-ruleset-bundler';
 import { dirname, join } from 'path';
 import * as path from '@stoplight/path';
-import { migrateRuleset } from './spectral/migrator/index';
-import { builtins } from './spectral/bundler/plugins/builtins';
+import { migrateRuleset } from './migrator/index';
+import { builtins } from './bundler/plugins/builtins';
 
 const { fetch } = spectralRuntime;
 
