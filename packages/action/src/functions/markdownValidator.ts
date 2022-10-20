@@ -27,4 +27,6 @@ export default (input: string) => {
       },
     ];
   }
+
+  return [];
 };
