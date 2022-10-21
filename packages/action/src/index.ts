@@ -1,11 +1,31 @@
 import * as fs from 'fs';
 import * as core from '@actions/core';
-import { loader as loadCustomRuleset } from '@compliancepal/spectral-rulesets';
+import {
+  loader,
+  RulesetValidationError,
+} from '@compliancepal/spectral-rulesets';
 import { RulesetDefinition } from '@stoplight/spectral-core';
 import { validator } from './validator/index';
 import 'dotenv/config';
 import { makeCheckRun, makeOutput } from './helpers/check';
 import path from 'path';
+
+const loadCustomRuleset = async (): Promise<RulesetDefinition | undefined> => {
+  const ROOT_PATH: string = process.env.GITHUB_WORKSPACE || process.cwd();
+
+  if (!process.env.INPUT_RULES) return;
+
+  //Use custom ruleset if one is defined
+  try {
+    return await loader(
+      path.join(ROOT_PATH, process.env.INPUT_RULES, 'rules.yaml'),
+    );
+  } catch (error) {
+    if (error instanceof RulesetValidationError) {
+      core.setFailed((error as RulesetValidationError).message);
+    }
+  }
+};
 
 const main = async () => {
   const started_at = new Date().toISOString();
@@ -17,14 +37,8 @@ const main = async () => {
   const raw = fs.readFileSync(process.env.INPUT_MODELCARD, 'utf8');
   core.info('Model card file opened');
 
-  const ROOT_PATH: string = process.env.GITHUB_WORKSPACE || process.cwd();
-
   //Use custom ruleset if one is defined
-  const custom_rules: RulesetDefinition | undefined = process.env.INPUT_RULES
-    ? await loadCustomRuleset(
-        path.join(ROOT_PATH, process.env.INPUT_RULES, 'rules.yaml'),
-      )
-    : undefined;
+  const custom_rules = await loadCustomRuleset();
 
   // Find problems
   const diagnostics = await validator(raw, custom_rules);

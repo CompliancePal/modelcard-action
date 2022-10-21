@@ -54,7 +54,7 @@ const loadCustomRuleset = async (
       fetch,
     },
   },
-): Promise<RulesetDefinition | undefined> => {
+): Promise<RulesetDefinition> => {
   if (!fs.existsSync(filepath)) {
     throw new RulesetValidationError(filepath, 'file-does-not-exist');
   }

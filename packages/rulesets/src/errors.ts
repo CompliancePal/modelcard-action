@@ -10,7 +10,7 @@ interface IAnnotation {
   title: string;
 }
 
-export type CustomRulesetValidationErrorCode =
+export type RulesetValidationErrorCode =
   | 'file-does-not-exist'
   | 'unsupported-ruleset-format'
   | 'invalid-ruleset';
@@ -18,7 +18,7 @@ export type CustomRulesetValidationErrorCode =
 export class RulesetValidationError extends Error {
   constructor(
     public readonly message: string,
-    public readonly code: CustomRulesetValidationErrorCode,
+    public readonly code: RulesetValidationErrorCode,
     public readonly annotations: IAnnotation[] = [],
   ) {
     super(message);
