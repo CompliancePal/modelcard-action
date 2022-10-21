@@ -24,24 +24,29 @@ const loadCustomRuleset = async (): Promise<RulesetDefinition | undefined> => {
     if (error instanceof RulesetValidationError) {
       core.info(`problems in file ${filepath}`);
 
-      error.annotations
-        .map((a) => ({ ...a, path: filepath }))
-        .forEach((a) => core.info(a.message));
+      error.annotations.forEach((a) => core.info(a.message));
 
-      const octokit = github.getOctokit(process.env.TOKEN!);
+      try {
+        const octokit = github.getOctokit(process.env.TOKEN!);
 
-      await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
-        owner: github.context.repo.owner,
-        repo: github.context.repo.repo,
-        head_sha: github.context.sha,
-        name: 'modelcard validation',
-        conclusion: 'failure',
-        output: {
-          title: 'Validation problems',
-          summary: '',
-          annotations: error.annotations.map((a) => ({ ...a, path: filepath })),
-        },
-      });
+        await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
+          owner: github.context.repo.owner,
+          repo: github.context.repo.repo,
+          head_sha: github.context.sha,
+          name: 'modelcard validation',
+          conclusion: 'failure',
+          output: {
+            title: 'Validation problems',
+            summary: 'These are the problems',
+            annotations: error.annotations.map((a) => ({
+              ...a,
+              path: filepath,
+            })),
+          },
+        });
+      } catch (e) {
+        console.log(e);
+      }
 
       core.setFailed(error.message);
     }
