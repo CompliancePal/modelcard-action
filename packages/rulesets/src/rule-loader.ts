@@ -24,14 +24,12 @@ const { fetch } = spectralRuntime;
 const runtime = (io: IO) => [builtins(), url(io)];
 
 const makeAnnotation = (
-  filepath: string,
   range: {
     start: { line: number; character: number };
     end: { line: number; character: number };
   },
   e: SpectralRulesetValidationError,
 ) => ({
-  path: filepath,
   start_line: range.start.line,
   start_column: range.start.character,
   end_line: range.end.line,
@@ -128,12 +126,12 @@ const loadCustomRuleset = async (
           const { range } = getLocationForJsonPath(input, e.path)!;
 
           // The output for GitHub is determined by https://docs.github.com/en/rest/checks/runs#create-a-check-run
-          return makeAnnotation(filepath, range, e);
+          return makeAnnotation(range, e);
         },
       );
 
       throw new RulesetValidationError(
-        'Ruleset validation failed',
+        'Custom ruleset validation failed',
         'invalid-ruleset',
         annotations,
       );

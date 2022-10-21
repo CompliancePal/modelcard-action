@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as core from '@actions/core';
+import * as github from '@actions/github';
 import {
   loader,
   RulesetValidationError,
@@ -15,17 +16,36 @@ const loadCustomRuleset = async (): Promise<RulesetDefinition | undefined> => {
 
   if (!process.env.INPUT_RULES) return;
 
-  //Use custom ruleset if one is defined
+  const filepath = path.join(process.env.INPUT_RULES, 'rules.yaml');
+
   try {
-    return await loader(
-      path.join(ROOT_PATH, process.env.INPUT_RULES, 'rules.yaml'),
-    );
+    return await loader(path.join(ROOT_PATH, filepath));
   } catch (error) {
     if (error instanceof RulesetValidationError) {
-      error.annotations.forEach((a) => core.info(a.message));
+      core.info(`problems in file ${filepath}`);
+
+      error.annotations
+        .map((a) => ({ ...a, path: filepath }))
+        .forEach((a) => core.info(a.message));
+
+      const octokit = github.getOctokit(process.env.TOKEN!);
+
+      await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        head_sha: github.context.sha,
+        name: 'modelcard validation',
+        conclusion: 'failure',
+        output: {
+          title: 'Validation problems',
+          summary: '',
+          annotations: error.annotations.map((a) => ({ ...a, path: filepath })),
+        },
+      });
 
       core.setFailed(error.message);
     }
+  } finally {
     return;
   }
 };
