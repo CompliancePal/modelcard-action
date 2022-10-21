@@ -1,0 +1,19 @@
+{
+  "name": "jest-presets",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Jest presets",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CompliancePal/modelcard-action.git"
+  },
+  "author": "Vlad Știrbu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CompliancePal/modelcard-action/issues"
+  },
+  "homepage": "https://github.com/CompliancePal/modelcard-action#readme",
+  "dependencies": {
+    "ts-jest": "^28.0.8"
+  }
+}

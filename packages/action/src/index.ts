@@ -1,10 +1,10 @@
 import * as fs from 'fs';
 import * as core from '@actions/core';
+import { loader as loadCustomRuleset } from '@compliancepal/spectral-rulesets';
 import { RulesetDefinition } from '@stoplight/spectral-core';
 import { validator } from './validator/index';
 import 'dotenv/config';
 import { makeCheckRun, makeOutput } from './helpers/check';
-import loadCustomRuleset from './helpers/rule-loader';
 import path from 'path';
 
 const main = async () => {

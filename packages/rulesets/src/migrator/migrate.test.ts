@@ -1,7 +1,6 @@
 import { vol } from 'memfs';
 import { join } from 'path';
 import { migrateRuleset } from './index';
-import rules from './transformers/rules';
 
 vol.fromJSON({
   'ruleset.yml': `

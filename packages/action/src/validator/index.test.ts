@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { validator } from './index';
-import loadCustomRuleset from '../helpers/rule-loader';
+import { loader as loadCustomRuleset } from '@compliancepal/spectral-rulesets';
 
 describe('validator', () => {
   test('valid model card schema', async () => {
