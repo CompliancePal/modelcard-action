@@ -52,8 +52,6 @@ function registerModule(
 export const builtins = (overrides: Partial<Overrides> = {}): Plugin => {
   const instanceId = Math.round(Math.random() * 1_000_000);
 
-  console.log(template);
-
   const modules = Object.fromEntries([
     registerModule(instanceId, '@stoplight/spectral-core', core, overrides),
     registerModule(

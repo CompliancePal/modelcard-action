@@ -29,7 +29,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "jest": {
     "preset": "jest-presets/jest/node"

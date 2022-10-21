@@ -1,0 +1,13 @@
+rules:
+  undeinfed-fn:
+    message: '{{error}}'
+    given: '$'
+    then:
+      function: templat
+  custom-function:
+    message: '{{error}}'
+    given: '$'
+    then:
+      function: template
+      functionOptions:
+        templatee: ''
