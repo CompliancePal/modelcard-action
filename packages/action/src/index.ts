@@ -38,18 +38,23 @@ const loadCustomRuleset = async (): Promise<RulesetDefinition | undefined> => {
 
         core.info(JSON.stringify(annotations));
 
-        await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
-          owner: github.context.repo.owner,
-          repo: github.context.repo.repo,
-          head_sha: github.context.sha,
-          name: 'modelcard validation',
-          conclusion: 'failure',
-          output: {
-            title: 'Validation problems',
-            summary: 'These are the problems',
-            annotations,
+        const response = await octokit.request(
+          'POST /repos/{owner}/{repo}/check-runs',
+          {
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
+            head_sha: github.context.sha,
+            name: 'modelcard validation',
+            conclusion: 'failure',
+            output: {
+              title: 'Validation problems',
+              summary: 'These are the problems',
+              annotations,
+            },
           },
-        });
+        );
+
+        core.info(`check run result ${response.status}`);
       } catch (e) {
         console.log(e);
       }
