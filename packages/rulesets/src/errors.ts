@@ -2,12 +2,12 @@ export type AnnotationLevel = 'failure';
 
 interface IAnnotation {
   start_line: number;
-  start_column: number;
+  start_column?: number;
   end_line: number;
-  end_column: number;
+  end_column?: number;
   annotation_level: AnnotationLevel;
   message: string;
-  title: string;
+  title?: string;
 }
 
 export type RulesetValidationErrorCode =

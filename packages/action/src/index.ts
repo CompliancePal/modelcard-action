@@ -29,6 +29,15 @@ const loadCustomRuleset = async (): Promise<RulesetDefinition | undefined> => {
       try {
         const octokit = github.getOctokit(process.env.TOKEN!);
 
+        const annotations = error.annotations.map(
+          ({ start_column, end_column, title, ...a }) => ({
+            ...a,
+            path: filepath,
+          }),
+        );
+
+        core.info(annotations);
+
         await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
           owner: github.context.repo.owner,
           repo: github.context.repo.repo,
@@ -38,10 +47,7 @@ const loadCustomRuleset = async (): Promise<RulesetDefinition | undefined> => {
           output: {
             title: 'Validation problems',
             summary: 'These are the problems',
-            annotations: error.annotations.map((a) => ({
-              ...a,
-              path: filepath,
-            })),
+            annotations,
           },
         });
       } catch (e) {
