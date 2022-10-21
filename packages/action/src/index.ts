@@ -36,7 +36,7 @@ const loadCustomRuleset = async (): Promise<RulesetDefinition | undefined> => {
           }),
         );
 
-        core.info(annotations);
+        core.info(JSON.stringify(annotations));
 
         await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
           owner: github.context.repo.owner,
