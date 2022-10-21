@@ -22,8 +22,11 @@ const loadCustomRuleset = async (): Promise<RulesetDefinition | undefined> => {
     );
   } catch (error) {
     if (error instanceof RulesetValidationError) {
-      core.setFailed((error as RulesetValidationError).message);
+      error.annotations.forEach((a) => core.info(a.message));
+
+      core.setFailed(error.message);
     }
+    return;
   }
 };
 
