@@ -9,6 +9,61 @@ import { RulesetDefinition } from '@stoplight/spectral-core';
 import { renderRulesetValidationSummary } from '../helpers/templates';
 import getOctokit from '../helpers/octokit';
 
+const errorHandler = async (error: unknown, filepath: string) => {
+  if (error instanceof RulesetValidationError) {
+    core.info(`problems in file ${filepath}`);
+
+    error.annotations.forEach((annotation) => {
+      core.info(`${annotation.jsonPath.join('.')} - ${annotation.message}`);
+    });
+
+    try {
+      const octokit = getOctokit();
+
+      if (!octokit) {
+        core.setFailed('GitHub TOKEN required');
+
+        return;
+      }
+
+      const annotations = error.annotations.map(
+        ({ start_column, end_column, title, ...rest }) => ({
+          ...rest,
+          path: filepath,
+        }),
+      );
+
+      const response = await octokit.request(
+        'POST /repos/{owner}/{repo}/check-runs',
+        {
+          owner: github.context.repo.owner,
+          repo: github.context.repo.repo,
+          head_sha: github.context.sha,
+          name: 'modelcard/ruleset',
+          conclusion: 'failure',
+          output: {
+            title: 'Validation problems',
+            summary: renderRulesetValidationSummary({ annotations }),
+            annotations,
+          },
+          external_id: `action-${process.env.GITHUB_RUN_ID}`,
+        },
+      );
+
+      core.info(
+        `Created a check run https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/runs/${response.data.id}`,
+      );
+    } catch (e) {
+      console.log(e);
+    }
+
+    core.setFailed(error.message);
+    return true;
+  }
+
+  return false;
+};
+
 export const loadCustomRuleset = async (): Promise<
   RulesetDefinition | undefined
 > => {
@@ -23,56 +78,10 @@ export const loadCustomRuleset = async (): Promise<
 
     return res;
   } catch (error) {
-    if (error instanceof RulesetValidationError) {
-      core.info(`problems in file ${filepath}`);
-
-      error.annotations.forEach((annotation) => {
-        core.info(`${annotation.jsonPath.join('.')} - ${annotation.message}`);
-      });
-
-      try {
-        const octokit = getOctokit();
-
-        if (!octokit) {
-          core.setFailed('GitHub TOKEN required');
-
-          return;
-        }
-
-        const annotations = error.annotations.map(
-          ({ start_column, end_column, title, ...rest }) => ({
-            ...rest,
-            path: filepath,
-          }),
-        );
-
-        const response = await octokit.request(
-          'POST /repos/{owner}/{repo}/check-runs',
-          {
-            owner: github.context.repo.owner,
-            repo: github.context.repo.repo,
-            head_sha: github.context.sha,
-            name: 'modelcard/ruleset',
-            conclusion: 'failure',
-            output: {
-              title: 'Validation problems',
-              summary: renderRulesetValidationSummary({ annotations }),
-              annotations,
-            },
-            external_id: `action-${process.env.GITHUB_RUN_ID}`,
-          },
-        );
-
-        core.info(
-          `Created a check run https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/runs/${response.data.id}`,
-        );
-      } catch (e) {
-        console.log(e);
-      }
-
-      core.setFailed(error.message);
+    if (await errorHandler(error, filepath)) {
+      return;
+    } else {
+      throw error;
     }
-
-    throw error;
   }
 };
