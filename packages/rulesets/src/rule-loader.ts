@@ -30,9 +30,9 @@ const makeAnnotation = (
   },
   e: SpectralRulesetValidationError,
 ) => ({
-  start_line: range.start.line,
+  start_line: range.start.line + 1,
   start_column: range.start.character,
-  end_line: range.end.line,
+  end_line: range.end.line + 1,
   end_column: range.end.character,
   annotation_level: 'failure' as AnnotationLevel,
   message: e.message,
