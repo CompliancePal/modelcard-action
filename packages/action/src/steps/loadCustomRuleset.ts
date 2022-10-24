@@ -33,7 +33,7 @@ export const loadCustomRuleset = async (): Promise<
         });
       });
 
-      core.summary.addRaw(renderRulesetValidationSummary(error));
+      core.summary.addRaw(renderRulesetValidationSummary(error)).write();
     }
 
     if (error instanceof Error) {
