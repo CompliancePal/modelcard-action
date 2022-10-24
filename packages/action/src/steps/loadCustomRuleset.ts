@@ -1,14 +1,11 @@
 import path from 'path';
 import * as core from '@actions/core';
-// import * as github from '@actions/github';
 import {
   loader,
   RulesetValidationError,
 } from '@compliancepal/spectral-rulesets';
 import { RulesetDefinition } from '@stoplight/spectral-core';
-// import { renderRulesetValidationSummary } from '../helpers/templates';
-// import getOctokit from '../helpers/octokit';
-// import { CHECK_NAME } from '../helpers/check';
+import { renderRulesetValidationSummary } from '../helpers/templates';
 
 export const loadCustomRuleset = async (): Promise<
   RulesetDefinition | undefined
@@ -36,45 +33,7 @@ export const loadCustomRuleset = async (): Promise<
         });
       });
 
-      // try {
-      //   const octokit = getOctokit();
-
-      //   if (!octokit) {
-      //     core.setFailed('GitHub TOKEN required');
-
-      //     return;
-      //   }
-
-      //   const annotations = error.annotations.map(
-      //     ({ start_column, end_column, title, ...rest }) => ({
-      //       ...rest,
-      //       path: filepath,
-      //     }),
-      //   );
-
-      //   const response = await octokit.request(
-      //     'POST /repos/{owner}/{repo}/check-runs',
-      //     {
-      //       owner: github.context.repo.owner,
-      //       repo: github.context.repo.repo,
-      //       head_sha: github.context.sha,
-      //       name: CHECK_NAME,
-      //       conclusion: 'failure',
-      //       output: {
-      //         title: 'Validation problems',
-      //         summary: renderRulesetValidationSummary({ annotations }),
-      //         annotations,
-      //       },
-      //       external_id: `action-${process.env.GITHUB_RUN_ID}`,
-      //     },
-      //   );
-
-      //   core.info(
-      //     `Created a check run https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/runs/${response.data.id}`,
-      //   );
-      // } catch (e) {
-      //   console.log(e);
-      // }
+      core.summary.addRaw(renderRulesetValidationSummary(error));
     }
 
     if (error instanceof Error) {
