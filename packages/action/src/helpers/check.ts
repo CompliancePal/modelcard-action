@@ -4,6 +4,8 @@ import nunjucks from 'nunjucks';
 import { load } from 'js-yaml';
 import { join } from 'path';
 
+export const CHECK_NAME = 'modelcard validation';
+
 const severity = {
   0: {
     name: 'ERROR',
@@ -91,7 +93,7 @@ export const makeCheckRun = (
       github.context.eventName === 'pull_request'
         ? github.context.payload.pull_request!.head.sha
         : github.context.sha,
-    name: 'modelcard validation',
+    name: CHECK_NAME,
     conclusion: getConclusion(diagnostics),
     output: makeOutput(diagnostics, opts.metadata),
     started_at: opts.started_at,

@@ -1,6 +1,10 @@
 export type AnnotationLevel = 'failure';
 
-interface IAnnotation {
+export interface IAnnotation {
+  /**
+   * JSON path for the property
+   */
+  path: (string | number)[];
   start_line: number;
   start_column?: number;
   end_line: number;
