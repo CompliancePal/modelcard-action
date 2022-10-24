@@ -57,6 +57,7 @@ export const loadCustomRuleset = async (): Promise<
               summary: renderRulesetValidationSummary({ annotations }),
               annotations,
             },
+            external_id: `action-${process.env.GITHUB_RUN_ID}`,
           },
         );
 
