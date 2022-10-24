@@ -15,7 +15,13 @@ nunjucks
 export const renderRulesetValidationSummary = (input: {
   annotations: IAnnotation[];
 }) => {
-  return nunjucks.render('ruleset-validation-summary.njk', input).trim();
+  try {
+    return nunjucks.render('ruleset-validation-summary.njk', input).trim();
+  } catch (error) {
+    console.log(error);
+
+    return;
+  }
 };
 
 export default nunjucks;
