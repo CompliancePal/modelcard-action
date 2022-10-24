@@ -25,8 +25,9 @@ export const loadCustomRuleset = async (): Promise<
     if (error instanceof RulesetValidationError) {
       core.info(`problems in file ${filepath}`);
 
+      core.info(JSON.stringify(error.annotations));
+
       error.annotations.forEach((annotation) => {
-        console.log(annotation);
         core.info(annotation.message);
       });
 
