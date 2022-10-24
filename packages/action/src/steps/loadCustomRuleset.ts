@@ -8,7 +8,6 @@ import {
 import { RulesetDefinition } from '@stoplight/spectral-core';
 import { renderRulesetValidationSummary } from '../helpers/templates';
 import getOctokit from '../helpers/octokit';
-import { CHECK_NAME } from '../helpers/check';
 
 export const loadCustomRuleset = async (): Promise<
   RulesetDefinition | undefined
@@ -51,7 +50,7 @@ export const loadCustomRuleset = async (): Promise<
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
             head_sha: github.context.sha,
-            name: CHECK_NAME,
+            name: 'modelcard/ruleset-validation',
             conclusion: 'failure',
             output: {
               title: 'Validation problems',
