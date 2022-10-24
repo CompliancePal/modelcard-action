@@ -8,6 +8,7 @@ import {
 import { RulesetDefinition } from '@stoplight/spectral-core';
 import { renderRulesetValidationSummary } from '../helpers/templates';
 import getOctokit from '../helpers/octokit';
+import { CHECK_NAME } from '../helpers/check';
 
 const errorHandler = async (error: unknown, filepath: string) => {
   if (error instanceof RulesetValidationError) {
@@ -39,7 +40,7 @@ const errorHandler = async (error: unknown, filepath: string) => {
           owner: github.context.repo.owner,
           repo: github.context.repo.repo,
           head_sha: github.context.sha,
-          name: 'modelcard/ruleset',
+          name: CHECK_NAME,
           conclusion: 'failure',
           output: {
             title: 'Validation problems',
