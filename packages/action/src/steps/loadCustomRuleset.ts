@@ -50,8 +50,7 @@ export const loadCustomRuleset = async (): Promise<
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
             head_sha: github.context.sha,
-            // name: 'modelcard/ruleset-validation',
-            name: process.env.GITHUB_JOB || 'modelcard/ruleset-validation',
+            name: 'modelcard/ruleset',
             conclusion: 'failure',
             output: {
               title: 'Validation problems',

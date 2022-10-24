@@ -4,7 +4,7 @@ import nunjucks from 'nunjucks';
 import { load } from 'js-yaml';
 import { join } from 'path';
 
-export const CHECK_NAME = 'modelcard validation';
+export const CHECK_NAME = 'modelcard/validation';
 
 const severity = {
   0: {
