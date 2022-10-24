@@ -12,12 +12,12 @@ const main = async () => {
     throw new Error('Environment variable INPUT_MODELCARD not found!');
   }
 
-  const raw = fs.readFileSync(process.env.INPUT_MODELCARD, 'utf8');
-  core.info('Model card file opened');
-
   //Use custom ruleset if one is defined
   const custom_rules = await loadCustomRuleset();
   core.info('Custom ruleset loaded');
+
+  const raw = fs.readFileSync(process.env.INPUT_MODELCARD, 'utf8');
+  core.info('Model card file opened');
 
   // Find problems
   const diagnostics = await validator(raw, custom_rules);
