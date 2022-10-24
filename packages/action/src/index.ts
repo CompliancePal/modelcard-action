@@ -17,10 +17,11 @@ const main = async () => {
 
   //Use custom ruleset if one is defined
   const custom_rules = await loadCustomRuleset();
-  core.info('Ruleset loaded');
+  core.info('Custom ruleset loaded');
 
   // Find problems
   const diagnostics = await validator(raw, custom_rules);
+  core.info(JSON.stringify(diagnostics));
   diagnostics.length > 0 && console.log(makeOutput(diagnostics, ''));
 
   const token = process.env.TOKEN;
