@@ -26,7 +26,7 @@ export const loadCustomRuleset = async (): Promise<
       core.info(`problems in file ${filepath}`);
 
       error.annotations.forEach((annotation) => {
-        core.info(annotation.path);
+        core.info(annotation.path.join('.'));
         core.info(annotation.message);
       });
 
