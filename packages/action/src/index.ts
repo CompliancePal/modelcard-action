@@ -17,6 +17,7 @@ const main = async () => {
 
   //Use custom ruleset if one is defined
   const custom_rules = await loadCustomRuleset();
+  core.info('Ruleset loaded');
 
   // Find problems
   const diagnostics = await validator(raw, custom_rules);
