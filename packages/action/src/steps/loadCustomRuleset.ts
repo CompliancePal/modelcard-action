@@ -25,7 +25,10 @@ export const loadCustomRuleset = async (): Promise<
     if (error instanceof RulesetValidationError) {
       core.info(`problems in file ${filepath}`);
 
-      error.annotations.forEach((a) => core.info(a.message));
+      error.annotations.forEach((annotation) => {
+        console.log(annotation);
+        core.info(annotation.message);
+      });
 
       try {
         const octokit = getOctokit();
