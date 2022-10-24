@@ -62,7 +62,7 @@ export const loadCustomRuleset = async (): Promise<
         );
 
         core.info(
-          `Created a check run https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/check-runs/${response.data.id}`,
+          `Created a check run https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/runs/${response.data.id}`,
         );
       } catch (e) {
         console.log(e);
