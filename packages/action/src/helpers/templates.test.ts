@@ -7,7 +7,7 @@ describe('render templates', () => {
       annotations: [
         {
           message: 'this is a test',
-          path: ['first', 'second'],
+          jsonPath: ['first', 'second'],
         } as IAnnotation,
       ],
     });

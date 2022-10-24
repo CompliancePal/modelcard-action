@@ -1,5 +1,4 @@
-The ruleset contains the following validation errors:
-{% for annotation in annotations %}
-* `{{ annotation.path | join(".") }}` - {{ annotation.message }}
+The ruleset contains the following validation errors: {% for annotation in annotations %}
+  * `{{annotation.jsonPath | join(".")}}` -{{annotation.message}}
 {% endfor %}
 Fix them to proceed with the model card check.

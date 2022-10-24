@@ -20,7 +20,7 @@ export const renderRulesetValidationSummary = (input: {
   } catch (error) {
     console.log(error);
 
-    return;
+    throw error;
   }
 };
 

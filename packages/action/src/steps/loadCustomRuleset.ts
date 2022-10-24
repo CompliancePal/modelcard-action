@@ -6,7 +6,7 @@ import {
   RulesetValidationError,
 } from '@compliancepal/spectral-rulesets';
 import { RulesetDefinition } from '@stoplight/spectral-core';
-import nunjucks from '../helpers/templates';
+import { renderRulesetValidationSummary } from '../helpers/templates';
 import getOctokit from '../helpers/octokit';
 import { CHECK_NAME } from '../helpers/check';
 
@@ -26,8 +26,7 @@ export const loadCustomRuleset = async (): Promise<
       core.info(`problems in file ${filepath}`);
 
       error.annotations.forEach((annotation) => {
-        core.info(annotation.path.join('.'));
-        core.info(annotation.message);
+        core.info(`${annotation.jsonPath.join('.')} - ${annotation.message}`);
       });
 
       try {
@@ -54,9 +53,7 @@ export const loadCustomRuleset = async (): Promise<
           conclusion: 'failure',
           output: {
             title: 'Validation problems',
-            summary: nunjucks.render('ruleset-validation-summary.njk', {
-              annotations,
-            }),
+            summary: renderRulesetValidationSummary({ annotations }),
             annotations,
           },
         });

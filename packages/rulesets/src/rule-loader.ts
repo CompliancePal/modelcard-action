@@ -37,7 +37,7 @@ const makeAnnotation = (
   annotation_level: 'failure' as AnnotationLevel,
   message: e.message,
   title: e.code,
-  path: e.path,
+  jsonPath: e.path,
 });
 
 // heavily inspired from https://github.com/stoplightio/vscode-spectral/blob/master/server/src/linter.ts#L133
