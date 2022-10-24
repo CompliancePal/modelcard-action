@@ -2,7 +2,9 @@ import { loadCustomRuleset } from './loadCustomRuleset';
 
 describe('custom rules', () => {
   beforeEach(() => {
-    process.env.INPUT_RULES = 'src/steps/__fixtures__';
+    process.env.INPUT_RULES = `${
+      process.env.CI ? 'packages/action/' : ''
+    }src/steps/__fixtures__`;
   });
 
   afterAll(() => {
