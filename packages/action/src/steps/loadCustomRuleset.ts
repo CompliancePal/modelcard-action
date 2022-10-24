@@ -19,7 +19,9 @@ export const loadCustomRuleset = async (): Promise<
   const filepath = path.join(process.env.INPUT_RULES, 'rules.yaml');
 
   try {
-    return await loader(path.join(ROOT_PATH, filepath));
+    const res = await loader(path.join(ROOT_PATH, filepath));
+
+    return res;
   } catch (error) {
     if (error instanceof RulesetValidationError) {
       core.info(`problems in file ${filepath}`);
@@ -70,7 +72,7 @@ export const loadCustomRuleset = async (): Promise<
 
       core.setFailed(error.message);
     }
-  } finally {
-    return;
+
+    throw error;
   }
 };
