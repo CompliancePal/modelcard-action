@@ -45,18 +45,25 @@ export const loadCustomRuleset = async (): Promise<
           }),
         );
 
-        await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
-          owner: github.context.repo.owner,
-          repo: github.context.repo.repo,
-          head_sha: github.context.sha,
-          name: CHECK_NAME,
-          conclusion: 'failure',
-          output: {
-            title: 'Validation problems',
-            summary: renderRulesetValidationSummary({ annotations }),
-            annotations,
+        const response = await octokit.request(
+          'POST /repos/{owner}/{repo}/check-runs',
+          {
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
+            head_sha: github.context.sha,
+            name: CHECK_NAME,
+            conclusion: 'failure',
+            output: {
+              title: 'Validation problems',
+              summary: renderRulesetValidationSummary({ annotations }),
+              annotations,
+            },
           },
-        });
+        );
+
+        core.info(
+          `Created a check run https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/check-runs/${response.data.id}`,
+        );
       } catch (e) {
         console.log(e);
       }
