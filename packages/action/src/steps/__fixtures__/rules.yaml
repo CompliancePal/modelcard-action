@@ -1,0 +1,11 @@
+rules:
+  valid-markdown-description:
+    message: '{{error}}'
+    given: '$.model_details.description'
+    then:
+      function: template
+      functionOptions:
+        template: |
+          ## First section
+
+          ## Second section
