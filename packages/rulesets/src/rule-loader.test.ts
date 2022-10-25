@@ -1,6 +1,7 @@
 import loadCustomRuleset from './rule-loader';
 import { RulesetDefinition } from '@stoplight/spectral-core';
 import { join } from 'path';
+import { RulesetValidationError } from './errors';
 
 describe('Custom rules', () => {
   describe('Rule loader', () => {
@@ -23,11 +24,48 @@ describe('Custom rules', () => {
       });
     });
 
-    it('returns undefined on bad path', async () => {
-      const custom_rules: RulesetDefinition | undefined =
-        await loadCustomRuleset('bad path');
+    it('throws invalid-ruleset', async () => {
+      try {
+        await loadCustomRuleset(
+          join(__dirname, '__fixtures__/rules-with-validation-errors.yaml'),
+        );
 
-      expect(custom_rules).toBeUndefined();
+        throw new Error('This should not happen');
+      } catch (error) {
+        expect(error).toBeInstanceOf(RulesetValidationError);
+        expect((error as RulesetValidationError).code).toBe('invalid-ruleset');
+        expect((error as RulesetValidationError).annotations).toHaveLength(3);
+      }
+    });
+
+    it('throws unsupported-ruleset-format', async () => {
+      try {
+        await loadCustomRuleset(
+          join(__dirname, '__fixtures__/wrong.extension'),
+        );
+
+        throw new Error('This should not happen');
+      } catch (error) {
+        expect(error).toBeInstanceOf(RulesetValidationError);
+        expect((error as RulesetValidationError).code).toBe(
+          'unsupported-ruleset-format',
+        );
+        expect((error as RulesetValidationError).annotations).toHaveLength(0);
+      }
+    });
+
+    it('throws file-does-not-exist', async () => {
+      try {
+        await loadCustomRuleset('missing.yaml');
+
+        throw new Error('This should not happen');
+      } catch (error) {
+        expect(error).toBeInstanceOf(RulesetValidationError);
+        expect((error as RulesetValidationError).code).toBe(
+          'file-does-not-exist',
+        );
+        expect((error as RulesetValidationError).annotations).toHaveLength(0);
+      }
     });
   });
 });
