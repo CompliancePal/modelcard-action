@@ -24,11 +24,11 @@ const main = async () => {
 
   const token = process.env.TOKEN;
 
-  // if (process.env.LOCAL_DEV === 'true') {
-  //   console.log(diagnostics.length);
-  //   diagnostics.forEach((d) => console.log(d));
-  //   return;
-  // }
+  if (process.env.LOCAL_DEV === 'true') {
+    console.log(diagnostics.length);
+    diagnostics.forEach((d) => console.log(d));
+    return;
+  }
 
   if (!token) {
     return core.setFailed('No TOKEN provided');
