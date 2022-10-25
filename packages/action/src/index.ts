@@ -1,9 +1,8 @@
 import * as fs from 'fs';
 import * as core from '@actions/core';
-import { validator } from './validator/index';
 import 'dotenv/config';
 import { makeCheckRun, makeOutput } from './helpers/check';
-import { loadCustomRuleset } from './steps/loadCustomRuleset';
+import { configureValidator } from './steps/configureValidator';
 
 const main = async () => {
   const started_at = new Date().toISOString();
@@ -12,25 +11,24 @@ const main = async () => {
     throw new Error('Environment variable INPUT_MODELCARD not found!');
   }
 
-  //Use custom ruleset if one is defined
-  const custom_rules = await loadCustomRuleset();
-  core.info('Custom ruleset loaded');
+  const validator = await configureValidator();
 
   const raw = fs.readFileSync(process.env.INPUT_MODELCARD, 'utf8');
   core.info('Model card file opened');
 
   // Find problems
-  const diagnostics = await validator(raw, custom_rules);
+  const diagnostics = await validator.validate(raw);
+
   core.info(JSON.stringify(diagnostics));
   diagnostics.length > 0 && console.log(makeOutput(diagnostics, ''));
 
   const token = process.env.TOKEN;
 
-  if (process.env.LOCAL_DEV === 'true') {
-    console.log(diagnostics.length);
-    diagnostics.forEach((d) => console.log(d));
-    return;
-  }
+  // if (process.env.LOCAL_DEV === 'true') {
+  //   console.log(diagnostics.length);
+  //   diagnostics.forEach((d) => console.log(d));
+  //   return;
+  // }
 
   if (!token) {
     return core.setFailed('No TOKEN provided');

@@ -12,7 +12,7 @@ interface ValidatorOptions {
   defaultRules: boolean;
 }
 
-interface Validator {
+export interface ModelCardValidator {
   validate: (content: string) => Promise<ISpectralDiagnostic[]>;
   ruleset: Ruleset;
 }
@@ -21,21 +21,24 @@ export const getValidator: {
   /**
    * Returns a validator with the default ruleset
    */
-  (): Promise<Validator>;
+  (): Promise<ModelCardValidator>;
   /**
    * Returns a validator with the custom ruleset extending the default ruleset
    */
-  (customRulesFilepath: string): Promise<Validator>;
+  (customRulesFilepath: string): Promise<ModelCardValidator>;
   /**
    * Returns a validator with the custom ruleset that can extend or not the default ruleset, base don the options provided
    */
-  (customRulesFilepath: string, opts: ValidatorOptions): Promise<Validator>;
+  (
+    customRulesFilepath: string,
+    opts: ValidatorOptions,
+  ): Promise<ModelCardValidator>;
 } = async (
   customRulesFilepath?: string,
   opts: ValidatorOptions = {
     defaultRules: true,
   },
-): Promise<Validator> => {
+): Promise<ModelCardValidator> => {
   const customRules = customRulesFilepath
     ? await loadCustomRuleset(customRulesFilepath)
     : undefined;

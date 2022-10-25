@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { configureValidator } from '../steps/configureValidator';
 import { makeOutput, renderModelCard } from './check';
-import { validator } from '../validator/index';
 
 describe('Checks', () => {
   describe('makeOutput', () => {
@@ -9,10 +9,7 @@ describe('Checks', () => {
       it('renders model card output', () => {
         const res = makeOutput(
           [],
-          readFileSync(
-            join(__dirname, '../validator/__fixtures__/basic.yaml'),
-            'utf8',
-          ),
+          readFileSync(join(__dirname, './__fixtures__/basic.yaml'), 'utf8'),
         );
 
         expect(res.title).toEqual('Model cards');
@@ -22,10 +19,7 @@ describe('Checks', () => {
     describe('renderModelCard', () => {
       it('renders model card', () => {
         const res = renderModelCard(
-          readFileSync(
-            join(__dirname, '../validator/__fixtures__/basic.yaml'),
-            'utf8',
-          ),
+          readFileSync(join(__dirname, './__fixtures__/basic.yaml'), 'utf8'),
         );
 
         expect(res).toBe(`## Model card
@@ -52,12 +46,13 @@ The model analyzed in this card detects one or more faces within an image or a v
 
     describe('Invalid model card', () => {
       it('renders validation problems, when MC has invalid schema', async () => {
+        const validator = await configureValidator();
         const content = readFileSync(
-          join(__dirname, '../validator/__fixtures__/invalid_schema.yaml'),
+          join(__dirname, './__fixtures__/invalid_schema.yaml'),
           'utf-8',
         );
 
-        const errors = await validator(content);
+        const errors = await validator.validate(content);
         const res = makeOutput(errors, '');
 
         expect(res.summary).toBe(
