@@ -1,8 +1,5 @@
 import { Document, Ruleset, Spectral } from '@stoplight/spectral-core';
-import {
-  parseWithPointers as parseYamlWithPointers,
-  getLocationForJsonPath,
-} from '@stoplight/yaml';
+import { parseWithPointers as parseYamlWithPointers } from '@stoplight/yaml';
 import * as Parsers from '@stoplight/spectral-parsers';
 import loadCustomRuleset from '../loader/rule-loader';
 import { defaultRules } from '../rules';
@@ -82,18 +79,18 @@ export const getValidator: {
 
       const annotations = diagnostics
         .filter((problem) => problem.code !== 'parser')
-        .map((problem) => {
-          const { range } = getLocationForJsonPath(input, problem.path)!;
-          // console.log(problem, range);
+        .map(
+          (problem) =>
+            ({
+              jsonPath: problem.path,
+              start_line: problem.range.start.line + 1,
+              end_line: problem.range.end.line + 1,
+              severity: problem.severity,
+              message: problem.message,
+            } as IAnnotation),
+        );
 
-          return {
-            jsonPath: problem.path,
-            start_line: range.end.line,
-            end_line: range.end.line,
-            severity: problem.severity,
-            message: problem.message,
-          } as IAnnotation;
-        });
+      console.log(annotations);
 
       throw new ModelCardValidationError(
         'The model card failed validation',
