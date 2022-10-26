@@ -19,8 +19,6 @@ describe('render templates', () => {
       ],
     });
 
-    console.log(summary);
-
     expect(summary).not.toBeUndefined();
   });
 
@@ -28,8 +26,6 @@ describe('render templates', () => {
     const modelCard = load(
       readFileSync(join(__dirname, './__fixtures__/basic.yaml'), 'utf-8'),
     ) as BaseModelCard;
-
-    console.log(modelCard);
 
     const render = renderModelCardDefault(modelCard as BaseModelCard);
 

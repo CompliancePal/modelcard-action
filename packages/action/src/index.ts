@@ -3,7 +3,10 @@ import * as core from '@actions/core';
 import 'dotenv/config';
 import { configureValidator } from './steps/configureValidator';
 import { BaseModelCard } from './types/BaseModelCard';
-import { renderModelCardDefault } from './helpers/templates';
+import {
+  renderModelCardDefault,
+  renderModelCardValidationSummary,
+} from './helpers/templates';
 import { ModelCardValidationError } from '@compliancepal/spectral-rulesets';
 import { DiagnosticSeverity } from '@compliancepal/spectral-rulesets/dist/errors';
 
@@ -18,7 +21,6 @@ const main = async () => {
   const raw = fs.readFileSync(process.env.INPUT_MODELCARD, 'utf8');
   core.info('Model card file opened');
 
-  // Find problems
   const modelCard = await validator.validate<BaseModelCard>(raw);
   core.info('Model card validated');
 
@@ -26,7 +28,7 @@ const main = async () => {
   core.info('Model card rendered');
 };
 
-main().catch((error) => {
+main().catch(async (error) => {
   if (error instanceof ModelCardValidationError) {
     error.annotations
       .map((annotation) => ({
@@ -50,6 +52,9 @@ main().catch((error) => {
       });
 
     // TODO: write failed summary
+    await core.summary
+      .addRaw(renderModelCardValidationSummary(error.annotations))
+      .write();
   }
 
   if (error instanceof Error) {

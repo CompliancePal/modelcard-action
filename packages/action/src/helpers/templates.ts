@@ -3,6 +3,29 @@ import nunjucks from 'nunjucks';
 import { join } from 'path';
 import { BaseModelCard } from '../types/BaseModelCard';
 
+const severity = {
+  0: {
+    name: 'ERROR',
+    color: 'red',
+    emojiString: ':x:',
+  },
+  1: {
+    name: 'WARNING',
+    color: 'yellow',
+    emojiString: ':warning:',
+  },
+  2: {
+    name: 'INFO',
+    color: 'blue',
+    emojiString: ':information_source:',
+  },
+  3: {
+    name: 'HINT',
+    color: 'green',
+    emojiString: ':bulb:',
+  },
+};
+
 nunjucks
   .configure(join(__dirname, '../../resources/templates'), {
     autoescape: true,
@@ -19,7 +42,7 @@ export const renderRulesetValidationSummary = (input: {
   annotations: IAnnotation[];
 }) => {
   try {
-    return nunjucks.render('ruleset-validation-summary.njk', input).trim();
+    return nunjucks.render('summaries/ruleset-validation.njk', input).trim();
   } catch (error) {
     console.log(error);
 
@@ -28,9 +51,13 @@ export const renderRulesetValidationSummary = (input: {
 };
 
 export const renderModelCardDefault = (modelcard: BaseModelCard) => {
-  console.log(modelcard);
-
   return nunjucks.render('modelcards/default.njk', modelcard).trim();
 };
+
+export const renderModelCardValidationSummary = (annotations: IAnnotation[]) =>
+  nunjucks.render('summaries/modelcard-validation', {
+    annotations,
+    severity,
+  });
 
 export default nunjucks;

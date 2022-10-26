@@ -95,7 +95,11 @@ export const getValidator: {
           } as IAnnotation;
         });
 
-      throw new ModelCardValidationError('', 'validation-error', annotations);
+      throw new ModelCardValidationError(
+        'The model card failed validation',
+        'validation-error',
+        annotations,
+      );
     },
     get ruleset() {
       return spectral.ruleset!;
