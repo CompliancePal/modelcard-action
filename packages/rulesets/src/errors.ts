@@ -26,13 +26,11 @@ export interface IAnnotation {
    * JSON path for the property
    */
   jsonPath: (string | number)[];
-  start_line: number;
-  start_column?: number;
-  end_line: number;
-  end_column?: number;
+  startLine: number;
+  endLine: number;
   message: string;
-  title?: string;
   severity: DiagnosticSeverity;
+  title: string;
 }
 
 export type RulesetValidationErrorCode =

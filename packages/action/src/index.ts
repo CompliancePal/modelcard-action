@@ -40,10 +40,8 @@ main().catch(async (error) => {
 
     error.annotations.forEach((annotation) => {
       core.error(`${annotation.jsonPath.join('.')} - ${annotation.message}`, {
+        ...annotation,
         file: customRulesFilepath,
-        title: annotation.title,
-        startLine: annotation.start_line,
-        endLine: annotation.end_line,
       });
     });
 

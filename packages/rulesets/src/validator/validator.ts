@@ -80,17 +80,15 @@ export const getValidator: {
       const annotations = diagnostics
         .filter((problem) => problem.code !== 'parser')
         .map(
-          (problem) =>
-            ({
-              jsonPath: problem.path,
-              start_line: problem.range.start.line + 1,
-              end_line: problem.range.end.line + 1,
-              severity: problem.severity,
-              message: problem.message,
-            } as IAnnotation),
+          (problem): IAnnotation => ({
+            jsonPath: problem.path,
+            startLine: problem.range.start.line + 1,
+            endLine: problem.range.end.line + 1,
+            severity: problem.severity,
+            message: problem.message,
+            title: problem.code.toString(),
+          }),
         );
-
-      console.log(annotations);
 
       throw new ModelCardValidationError(
         'The model card failed validation',

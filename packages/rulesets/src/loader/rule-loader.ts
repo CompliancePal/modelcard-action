@@ -33,17 +33,14 @@ const makeAnnotation = (
     end: { line: number; character: number };
   },
   e: SpectralRulesetValidationError,
-) =>
-  ({
-    start_line: range.start.line + 1,
-    start_column: range.start.character,
-    end_line: range.end.line + 1,
-    end_column: range.end.character,
-    message: e.message,
-    title: e.code,
-    jsonPath: e.path,
-    severity: DiagnosticSeverity.Error,
-  } as IAnnotation);
+): IAnnotation => ({
+  startLine: range.start.line + 1,
+  endLine: range.end.line + 1,
+  message: e.message,
+  title: e.code,
+  jsonPath: e.path,
+  severity: DiagnosticSeverity.Error,
+});
 
 // heavily inspired from https://github.com/stoplightio/vscode-spectral/blob/master/server/src/linter.ts#L133
 const loadCustomRuleset = async (
