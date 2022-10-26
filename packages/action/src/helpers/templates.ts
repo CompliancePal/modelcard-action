@@ -54,9 +54,11 @@ export const renderModelCardDefault = (modelcard: BaseModelCard) => {
   return nunjucks.render('modelcards/default.njk', modelcard).trim();
 };
 
-export const renderModelCardValidationSummary = (annotations: IAnnotation[]) =>
-  nunjucks.render('summaries/modelcard-validation', {
-    annotations,
+export const renderModelCardValidationSummary = (input: {
+  annotations: IAnnotation[];
+}) =>
+  nunjucks.render('summaries/modelcard-validation.njk', {
+    ...input,
     severity,
   });
 

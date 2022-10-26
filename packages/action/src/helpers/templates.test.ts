@@ -5,6 +5,7 @@ import { join } from 'path';
 import { BaseModelCard } from '../types/BaseModelCard';
 import {
   renderModelCardDefault,
+  renderModelCardValidationSummary,
   renderRulesetValidationSummary,
 } from './templates';
 
@@ -20,6 +21,23 @@ describe('render templates', () => {
     });
 
     expect(summary).not.toBeUndefined();
+  });
+
+  it('renders modelcard validation summary', () => {
+    const summary = renderModelCardValidationSummary({
+      annotations: [
+        {
+          message: 'this is a test',
+          jsonPath: ['first', 'second'],
+        } as IAnnotation,
+      ],
+    });
+
+    expect(summary).toBe(`The model card has the following problems:
+
+  *  \`first.second\`: this is a test
+
+Fix them before you can render the model card.`);
   });
 
   it('renders default model card', () => {

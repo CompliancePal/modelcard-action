@@ -51,10 +51,7 @@ main().catch(async (error) => {
         }
       });
 
-    // TODO: write failed summary
-    await core.summary
-      .addRaw(renderModelCardValidationSummary(error.annotations))
-      .write();
+    await core.summary.addRaw(renderModelCardValidationSummary(error)).write();
   }
 
   if (error instanceof Error) {
