@@ -2,6 +2,10 @@ import { readFileSync } from 'fs';
 import { Rule } from '@stoplight/spectral-core';
 import { join } from 'path';
 import { getValidator } from './validator';
+import {
+  ModelCardValidationError,
+  ModelCardValidationErrorCode,
+} from '../errors';
 
 describe('validator', () => {
   describe('rulesets', () => {
@@ -56,10 +60,31 @@ describe('validator', () => {
 
         const res = await validator.validate(content);
 
-        expect(res).toHaveLength(0);
+        expect(res).toMatchObject({
+          model_details: {},
+        });
       });
 
-      test('invalid mode card schema', async () => {
+      describe('with custom rules', () => {
+        test('valid model card schema with custom rules', async () => {
+          const validator = await getValidator(
+            join(__dirname, '__fixtures__/modelcards/ruleset.yaml'),
+          );
+
+          const content = readFileSync(
+            join(__dirname, '__fixtures__/modelcards/basic.yaml'),
+            'utf-8',
+          );
+
+          const res = await validator.validate(content);
+
+          expect(res).toMatchObject({
+            model_details: {},
+          });
+        });
+      });
+
+      test('invalid model card schema', async () => {
         const validator = await getValidator();
 
         const content = readFileSync(
@@ -67,30 +92,33 @@ describe('validator', () => {
           'utf-8',
         );
 
-        const res = await validator.validate(content);
-
-        expect(res).toHaveLength(1);
-
-        expect(res[0].message).toBe(
-          '"performance_metrics" property type must be array',
-        );
+        try {
+          await validator.validate(content);
+        } catch (error) {
+          expect(error).toBeInstanceOf(ModelCardValidationError);
+          expect(error).toMatchObject({
+            code: 'validation-error' as ModelCardValidationErrorCode,
+            annotations: expect.any(Array),
+          });
+        }
       });
-    });
 
-    describe('with custom rules', () => {
-      test('valid model card schema with custom rules', async () => {
-        const validator = await getValidator(
-          join(__dirname, '__fixtures__/modelcards/ruleset.yaml'),
-        );
+      test('invalid yaml model card', async () => {
+        const validator = await getValidator();
 
         const content = readFileSync(
-          join(__dirname, '__fixtures__/modelcards/basic.yaml'),
+          join(__dirname, '__fixtures__/modelcards/invalid_yaml.yaml'),
           'utf-8',
         );
 
-        const res = await validator.validate(content);
-
-        expect(res).toHaveLength(0);
+        try {
+          await validator.validate(content);
+        } catch (error) {
+          expect(error).toBeInstanceOf(ModelCardValidationError);
+          expect(error).toMatchObject({
+            code: 'invalid-yaml' as ModelCardValidationErrorCode,
+          });
+        }
       });
     });
   });
