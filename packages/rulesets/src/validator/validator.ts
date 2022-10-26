@@ -63,10 +63,10 @@ export const getValidator: {
         new Document(content, Parsers.Yaml),
       );
 
-      const input = parseYamlWithPointers(content);
+      const input = parseYamlWithPointers<T>(content);
 
       if (diagnostics.length === 0) {
-        return input.data as T;
+        return input.data!;
       }
 
       if (

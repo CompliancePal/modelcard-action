@@ -7,11 +7,13 @@ nunjucks
   .configure(join(__dirname, '../../resources/templates'), {
     autoescape: true,
   })
-  .addFilter(
-    'date',
-    (date: Date) =>
-      `${date.getUTCDate()}-${date.getUTCMonth() + 1}-${date.getUTCFullYear()}`,
-  );
+  .addFilter('date', (date: Date) => {
+    console.log(date);
+
+    return `${date.getUTCDate()}-${
+      date.getUTCMonth() + 1
+    }-${date.getUTCFullYear()}`;
+  });
 
 export const renderRulesetValidationSummary = (input: {
   annotations: IAnnotation[];
@@ -26,6 +28,8 @@ export const renderRulesetValidationSummary = (input: {
 };
 
 export const renderModelCardDefault = (modelcard: BaseModelCard) => {
+  console.log(modelcard);
+
   return nunjucks.render('modelcards/default.njk', modelcard).trim();
 };
 
