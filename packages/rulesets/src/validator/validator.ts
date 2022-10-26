@@ -88,7 +88,7 @@ export const getValidator: {
 
           return {
             jsonPath: problem.path,
-            start_line: range.start.line,
+            start_line: range.end.line,
             end_line: range.end.line,
             severity: problem.severity,
             message: problem.message,

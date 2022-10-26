@@ -38,7 +38,6 @@
   },
   "dependencies": {
     "@actions/core": "^1.8.2",
-    "@actions/github": "^5.0.3",
     "@compliancepal/spectral-rulesets": "*",
     "@stoplight/spectral-core": "^1.12.2",
     "ast-types": "^0.14.2",
