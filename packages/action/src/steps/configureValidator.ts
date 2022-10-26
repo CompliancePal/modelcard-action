@@ -1,32 +1,34 @@
 import path from 'path';
 import * as core from '@actions/core';
 import {
-  loader,
+  getValidator,
   RulesetValidationError,
 } from '@compliancepal/spectral-rulesets';
-import { RulesetDefinition } from '@stoplight/spectral-core';
 import { renderRulesetValidationSummary } from '../helpers/templates';
 
-export const loadCustomRuleset = async (): Promise<
-  RulesetDefinition | undefined
-> => {
+export const configureValidator = async () => {
   const ROOT_PATH: string = process.env.GITHUB_WORKSPACE || process.cwd();
-
-  if (!process.env.INPUT_RULES) return;
-
-  const filepath = path.join(process.env.INPUT_RULES, 'rules.yaml');
+  let customRulesFilepath: string | null = null;
 
   try {
-    const res = await loader(path.join(ROOT_PATH, filepath));
+    if (process.env.INPUT_RULES) {
+      customRulesFilepath = path.join(process.env.INPUT_RULES, 'rules.yaml');
 
-    return res;
+      return getValidator(path.join(ROOT_PATH, customRulesFilepath), {
+        defaultRules: !(
+          process.env.INPUT_DISABLE_DEFAULT_RULES?.toLowerCase() === 'true'
+        ),
+      });
+    } else {
+      return getValidator();
+    }
   } catch (error) {
     if (error instanceof RulesetValidationError) {
-      core.info(`problems in file ${filepath}`);
+      core.info(`problems in file ${customRulesFilepath}`);
 
       error.annotations.forEach((annotation) => {
         core.error(`${annotation.jsonPath.join('.')} - ${annotation.message}`, {
-          file: filepath,
+          file: customRulesFilepath!,
           title: annotation.title,
           startLine: annotation.start_line,
           endLine: annotation.end_line,

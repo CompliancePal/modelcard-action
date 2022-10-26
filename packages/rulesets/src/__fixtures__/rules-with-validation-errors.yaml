@@ -1,5 +1,5 @@
 rules:
-  undeinfed-fn:
+  undefined-fn:
     message: '{{error}}'
     given: '$'
     then:

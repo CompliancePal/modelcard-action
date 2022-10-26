@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "turbo run build",
-    "clean": "rimraf .cache packages/*/{dist,.cache,coverage}",
+    "clean": "rimraf .cache packages/*/{dist,.cache,.turbo,coverage}",
     "dev": "turbo run dev",
     "test": "turbo run test"
   },

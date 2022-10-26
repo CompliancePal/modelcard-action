@@ -6,12 +6,12 @@ import { join } from 'path';
 const loadSchema = () =>
   JSON.parse(
     readFileSync(
-      join(__dirname, '../../resources/schemas/modelcard-v0.0.2.json'),
+      join(__dirname, '../resources/schemas/modelcard-v0.0.2.json'),
       'utf8',
     ),
   );
 
-const rules: RulesetDefinition = {
+export const defaultRules: RulesetDefinition = {
   rules: {
     schema: {
       given: '$',
@@ -25,5 +25,3 @@ const rules: RulesetDefinition = {
     },
   },
 };
-
-export default rules;
