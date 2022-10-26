@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import { join } from 'path';
 import * as core from '@actions/core';
 import 'dotenv/config';
 import { configureValidator } from './steps/configureValidator';
@@ -6,9 +7,13 @@ import { BaseModelCard } from './types/BaseModelCard';
 import {
   renderModelCardDefault,
   renderModelCardValidationSummary,
+  renderRulesetValidationSummary,
 } from './helpers/templates';
 import { ModelCardValidationError } from '@compliancepal/spectral-rulesets';
-import { DiagnosticSeverity } from '@compliancepal/spectral-rulesets/dist/errors';
+import {
+  DiagnosticSeverity,
+  RulesetValidationError,
+} from '@compliancepal/spectral-rulesets/dist/errors';
 
 const main = async () => {
   if (!process.env.INPUT_MODELCARD) {
@@ -29,6 +34,22 @@ const main = async () => {
 };
 
 main().catch(async (error) => {
+  if (error instanceof RulesetValidationError) {
+    const customRulesFilepath = join(process.env.INPUT_RULES!, 'rules.yaml');
+    core.info(`problems in file ${customRulesFilepath}`);
+
+    error.annotations.forEach((annotation) => {
+      core.error(`${annotation.jsonPath.join('.')} - ${annotation.message}`, {
+        file: customRulesFilepath,
+        title: annotation.title,
+        startLine: annotation.start_line,
+        endLine: annotation.end_line,
+      });
+    });
+
+    await core.summary.addRaw(renderRulesetValidationSummary(error)).write();
+  }
+
   if (error instanceof ModelCardValidationError) {
     error.annotations
       .map((annotation) => ({
