@@ -54,7 +54,7 @@ export const renderModelCard = (metadata: string) => {
         }-${date.getUTCFullYear()}`,
     );
 
-  return nunjucks.render('dummy.njk', modelcard).trim();
+  return nunjucks.render('modelcards/default.njk', modelcard).trim();
 };
 
 // TODO: Determine a more elaborate mode reaching the conlcusion based on the severity of the diagnostics

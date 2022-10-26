@@ -1,6 +1,7 @@
 import { IAnnotation } from '@compliancepal/spectral-rulesets';
 import nunjucks from 'nunjucks';
 import { join } from 'path';
+import { BaseModelCard } from '../types/BaseModelCard';
 
 nunjucks
   .configure(join(__dirname, '../../resources/templates'), {
@@ -22,6 +23,10 @@ export const renderRulesetValidationSummary = (input: {
 
     throw error;
   }
+};
+
+export const renderModelCardDefault = (modelcard: BaseModelCard) => {
+  return nunjucks.render('modelcards/default.njk', modelcard).trim();
 };
 
 export default nunjucks;

@@ -27,10 +27,14 @@
     "@types/node-fetch": "^2.6.2",
     "@types/nunjucks": "^3.2.1",
     "jest": "^28.1.1",
+    "jest-presets": "*",
     "memfs": "^3.4.7",
     "ts-jest": "^28.0.4",
     "tsconfig": "*",
     "typescript": "^4.8.4"
+  },
+  "jest": {
+    "preset": "jest-presets/jest/node"
   },
   "dependencies": {
     "@actions/core": "^1.8.2",

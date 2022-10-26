@@ -1,0 +1,5 @@
+The model card has the following problems:
+{% for problem in diagnostics %}
+  * {{severity[problem.severity].emojiString}} `{{problem.path | join(".")}}`: {{problem.message}}
+{% endfor %}
+Fix them before you can render the model card.
