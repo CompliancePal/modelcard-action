@@ -21,7 +21,6 @@ const main = async () => {
   // Find problems
   const modelCard = await validator.validate<BaseModelCard>(raw);
   core.info('Model card validated');
-  core.info(JSON.stringify(modelCard, null, 2));
 
   await core.summary.addRaw(renderModelCardDefault(modelCard)).write();
   core.info('Model card rendered');

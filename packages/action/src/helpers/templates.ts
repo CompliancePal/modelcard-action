@@ -7,8 +7,8 @@ nunjucks
   .configure(join(__dirname, '../../resources/templates'), {
     autoescape: true,
   })
-  .addFilter('date', (date: Date) => {
-    console.log(date);
+  .addFilter('date', (input: Date) => {
+    const date = new Date(input);
 
     return `${date.getUTCDate()}-${
       date.getUTCMonth() + 1
