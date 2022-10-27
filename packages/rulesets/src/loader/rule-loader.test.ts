@@ -1,7 +1,7 @@
 import loadCustomRuleset from './rule-loader';
 import { RulesetDefinition } from '@stoplight/spectral-core';
 import { join } from 'path';
-import { RulesetValidationError } from './errors';
+import { RulesetValidationError } from '../errors';
 
 describe('Custom rules', () => {
   describe('Rule loader', () => {

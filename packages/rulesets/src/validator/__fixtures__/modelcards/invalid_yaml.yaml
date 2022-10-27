@@ -1,0 +1,36 @@
+model_details:
+  name: 'Facial Detection'
+  version
+    name: 0.0.1
+    date: 2022-06-01
+  description: |
+    <!-- markdown description of model -->
+    ## Face Detection
+    The model analyzed in this card detects one or more faces within an image or a video frame, and returns a box around each face along with the location of the faces' major landmarks. The model's goal is exclusively to identify the existence and location of faces in an image. It does not attempt to discover identities or demographics.
+model_parameters:
+  data:
+    - name: training
+      description: A descriptive description
+    - name: testing
+      description: No further description provided
+quantitative_analysis:
+  data:
+    - name: FACES
+      description: FACES (A subset of Open Images) is a face detection evaluation dataset sampled from Open Images Dataset V4 by Google researchers.
+      link: https://storage.googleapis.com/openimages/web/index.html
+      size: 94866
+    - name: FDDB
+      description: Face Detection Data Set and Benchmark FDDB is a public dataset for face detection created by researchers at the University of Massachusetts, Amherst.
+      link: http://vis-www.cs.umass.edu/fddb/
+      size: 2845
+    - name: LFW
+      description: Labeled Faces in the Wild LFW is a public benchmarking dataset created and maintained by researchers at the University of Massachusetts, Amherst.
+      link: http://vis-www.cs.umass.edu/lfw/
+      size: 13232
+  performance_metrics:
+    type: useful type
+    value: '7000'
+    confidence_interval:
+      lower_bound: '6889'
+      upper_bound: '7111'
+    raw: https://modelcards.withgoogle.com/assets/files/Face_Detection_Model-Card-all_chart_data.tsv

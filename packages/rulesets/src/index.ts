@@ -1,3 +1,7 @@
-export { default as loader } from './rule-loader';
-export { getValidator, ModelCardValidator } from './validator';
-export { IAnnotation, RulesetValidationError } from './errors';
+export { default as loader } from './loader/rule-loader';
+export { getValidator, ModelCardValidator } from './validator/validator';
+export {
+  IAnnotation,
+  RulesetValidationError,
+  ModelCardValidationError,
+} from './errors';
