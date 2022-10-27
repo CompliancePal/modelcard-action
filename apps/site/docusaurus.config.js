@@ -58,6 +58,13 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      announcementBar: {
+        id: 'support_us',
+        content:
+          '⭐️ If you like ModelCard Action, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/compliancepal/modelcard-action">GitHub</a>.',
+        backgroundColor: '#fafbfc',
+        textColor: '#091E42',
+      },
       navbar: {
         title: 'ModelCard Action',
         logo: {
