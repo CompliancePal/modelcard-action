@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Check for model card file
-        uses: CompliancePal/modelcard-action@<branch/tag>
+        uses: CompliancePal/modelcard-action@main
         with:
           modelcard: modelcard.yaml
           rules: .modelcard/rules
