@@ -14,6 +14,8 @@ import {
   DiagnosticSeverity,
   RulesetValidationError,
 } from '@compliancepal/spectral-rulesets/dist/errors';
+import { augmentModelCard } from './steps/mlflowIntegration';
+import { ExtendedModelCard } from './mlflow';
 
 const main = async () => {
   if (!process.env.INPUT_MODELCARD) {
@@ -29,7 +31,11 @@ const main = async () => {
   const modelCard = await validator.validate<BaseModelCard>(raw);
   core.info('Model card validated');
 
-  await core.summary.addRaw(renderModelCardDefault(modelCard)).write();
+  const augmentedModelCard = await augmentModelCard(
+    modelCard as ExtendedModelCard,
+  );
+
+  await core.summary.addRaw(renderModelCardDefault(augmentedModelCard)).write();
   core.info('Model card rendered');
 };
 

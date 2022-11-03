@@ -5,7 +5,7 @@ import { BaseModelCard } from './types/BaseModelCard';
 const USER_AGENT =
   'modelcard-action/1.0 (https://github.com/CompliancePal/modelcard-action)';
 
-export interface ExtendedModelCard extends BaseModelCard {
+interface RunIdInfo {
   model_details: {
     run: {
       type: 'mflow';
@@ -13,6 +13,8 @@ export interface ExtendedModelCard extends BaseModelCard {
     };
   };
 }
+
+export type ExtendedModelCard = BaseModelCard & RunIdInfo;
 
 interface Metric {
   key: string;

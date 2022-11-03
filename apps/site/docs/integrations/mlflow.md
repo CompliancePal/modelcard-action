@@ -11,7 +11,24 @@ The integration is experimental.
 The integration expects that the MLflow Tracking Server has the proxied artifact storage access [enabled](https://www.mlflow.org/docs/latest/tracking.html#id32).
 :::
 
-## Architecture
+## Overview
+
+The integration takes as input the modelcard document tracked in git and augments it with with experiment information tracked by the MLflow server.
+
+### Interaction
+
+The _Data Scientist_ performs experiments in their development environment. The runs are tracked by the MLflow server (1-2). The winning experiment is selected by including the `run_id` in the model card document and making a new commit (3-4):
+
+```yaml title="modelcard.yaml"
+model_details:
+  ...
+  run:
+    type: mflow
+    id: 2a84d204c6794965bc36641b46b77255
+...
+```
+
+GitHub triggers the **modelcard-action** and it receives the commit (5). The action fetches the run details from the MLflow server (6), performs validation (7), adds the augmented model card to experiment run as an artifact (8), and renders the model card.
 
 ![](img/mlflow/sequence.svg)
 
