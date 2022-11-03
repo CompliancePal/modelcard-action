@@ -15,17 +15,15 @@ export const augmentModelCard = async (modelcard: ExtendedModelCard) => {
   if (details.run.data.metrics.length > 0) {
     if (modelcard.quantitative_analysis === undefined) {
       modelcard.quantitative_analysis = {
-        performance_metrics: [],
+        performance_metrics: details.run.data.metrics.map(
+          (m): PerformanceMetric => ({
+            type: m.key,
+            value: m.value.toString(),
+          }),
+        ),
         graphics: {},
       };
     }
-
-    details.run.data.metrics.forEach((m) => {
-      modelcard.quantitative_analysis!.performance_metrics!.push({
-        type: m.key,
-        value: m.value.toString(),
-      } as PerformanceMetric);
-    });
   }
 
   await addModelCardArtifact(details, modelcard);
