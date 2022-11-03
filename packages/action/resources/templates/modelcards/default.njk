@@ -19,7 +19,7 @@ No datasets found
 
 #### Performance metrics
 
-{% metric in quantitative_analysis.performance_metrics %}
+{% for metric in quantitative_analysis.performance_metrics %}
 * {{ metric.type }} - {{ metric.value }}
 {% else %}
 No metrics found
