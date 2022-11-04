@@ -162,3 +162,9 @@ jobs:
 The **modelcard-action** adds the modelcard metadata document (e.g. `modelcard.json`) to the artifacts created during the tracked experiment run.
 
 ![Modelcard metadata as artifact](img/mlflow/artifact.png)
+
+## Example
+
+An example usage of the integration is available at [mlflow-example](https://github.com/CompliancePal/mlflow-example).
+
+![Model card rendering](img/mlflow/modelcard.png)
