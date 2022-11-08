@@ -24,6 +24,7 @@ const main = async () => {
 
   const validator = await configureValidator();
   core.info('Validator created');
+  core.debug(JSON.stringify(validator.ruleset, 0, 2));
 
   const raw = fs.readFileSync(process.env.INPUT_MODELCARD, 'utf8');
   core.info('Model card file opened');
