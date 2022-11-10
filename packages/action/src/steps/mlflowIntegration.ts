@@ -2,7 +2,7 @@ import { addModelCardArtifact, getRunDetails } from 'mlflow-integration';
 import { PerformanceMetric, ExtendedModelCard } from 'types';
 
 export const augmentModelCard = async (modelcard: ExtendedModelCard) => {
-  if (!process.env.MLFLOW_TRACKING_URI) {
+  if (!process.env.MLFLOW_TRACKING_URI || !modelcard.model_details?.run?.id) {
     return modelcard;
   }
 

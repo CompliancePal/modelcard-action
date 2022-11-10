@@ -69,4 +69,16 @@ describe('mlflow', () => {
       },
     });
   });
+
+  test('augment model card', async () => {
+    const modelWithoutRunId = {
+      model_details: {},
+    };
+
+    const result = await augmentModelCard(
+      modelWithoutRunId as ExtendedModelCard,
+    );
+
+    expect(result).toBe(modelWithoutRunId);
+  });
 });
