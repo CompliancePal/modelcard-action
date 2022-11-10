@@ -1,6 +1,6 @@
 import { URL } from 'url';
 import fetch from 'cross-fetch';
-import { BaseModelCard } from './types/BaseModelCard';
+import { BaseModelCard } from 'types';
 
 const USER_AGENT =
   'modelcard-action/1.0 (https://github.com/CompliancePal/modelcard-action)';

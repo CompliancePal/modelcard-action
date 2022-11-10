@@ -2,7 +2,7 @@ import { IAnnotation } from '@compliancepal/spectral-rulesets';
 import { readFileSync } from 'fs';
 import { load } from 'js-yaml';
 import { join } from 'path';
-import { BaseModelCard } from '../types/BaseModelCard';
+import { BaseModelCard } from 'types';
 import {
   renderModelCardDefault,
   renderModelCardValidationSummary,

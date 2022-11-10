@@ -29,9 +29,9 @@
     "jest": "^28.1.1",
     "jest-presets": "*",
     "memfs": "^3.4.7",
-    "nock": "^13.2.9",
     "ts-jest": "^28.0.4",
     "tsconfig": "*",
+    "types": "*",
     "typescript": "^4.8.4"
   },
   "jest": {
@@ -42,10 +42,10 @@
     "@compliancepal/spectral-rulesets": "*",
     "@stoplight/spectral-core": "^1.12.2",
     "ast-types": "^0.14.2",
-    "cross-fetch": "^3.1.5",
     "dotenv": "^16.0.1",
     "js-yaml": "^4.1.0",
     "markdownlint": "^0.25.1",
+    "mlflow-integration": "*",
     "nunjucks": "^3.2.3"
   }
 }

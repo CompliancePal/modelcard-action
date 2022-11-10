@@ -5,7 +5,6 @@ import {
   getRunDetails,
   Run,
 } from './mlflow';
-import { augmentModelCard } from './steps/mlflowIntegration';
 
 describe('mlflow', () => {
   const id = '2a84d204c6794965bc36641b46b77255';
@@ -89,49 +88,6 @@ describe('mlflow', () => {
 
     expect(res).toMatchObject({
       ok: true,
-    });
-  });
-
-  test('augment model card', async () => {
-    const metric = {
-      key: 'key',
-      value: 123,
-    };
-
-    nock(MLFLOW_TRACKING_URI)
-      .get(`/api/2.0/mlflow/runs/get?run_id=${id}`)
-      .reply(200, {
-        run: {
-          data: {
-            metrics: [metric],
-          },
-          info: {
-            artifact_uri: `mlflow-artifacts:/0/${id}/artifacts`,
-            run_id: id,
-          },
-        },
-      });
-
-    nock(MLFLOW_TRACKING_URI)
-      .put(
-        `/api/2.0/mlflow-artifacts/artifacts/0/${id}/artifacts/modelcard.json`,
-      )
-      .reply(201);
-
-    const result = await augmentModelCard(mc);
-
-    expect(result).toMatchObject({
-      ...mc,
-      ...{
-        quantitative_analysis: {
-          performance_metrics: [
-            {
-              type: metric.key,
-              value: metric.value,
-            },
-          ],
-        },
-      },
     });
   });
 });

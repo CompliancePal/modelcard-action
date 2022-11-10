@@ -1,7 +1,7 @@
 import { IAnnotation } from '@compliancepal/spectral-rulesets';
 import nunjucks from 'nunjucks';
 import { join } from 'path';
-import { BaseModelCard } from '../types/BaseModelCard';
+import { BaseModelCard } from 'types';
 
 const severity = {
   0: {

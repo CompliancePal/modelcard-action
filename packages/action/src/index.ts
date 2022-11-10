@@ -3,7 +3,7 @@ import { join } from 'path';
 import * as core from '@actions/core';
 import 'dotenv/config';
 import { configureValidator } from './steps/configureValidator';
-import { BaseModelCard } from './types/BaseModelCard';
+import { BaseModelCard } from 'types';
 import {
   renderModelCardDefault,
   renderModelCardValidationSummary,
@@ -15,7 +15,7 @@ import {
   RulesetValidationError,
 } from '@compliancepal/spectral-rulesets/dist/errors';
 import { augmentModelCard } from './steps/mlflowIntegration';
-import { ExtendedModelCard } from './mlflow';
+import { ExtendedModelCard } from 'mlflow-integration';
 
 const main = async () => {
   if (!process.env.INPUT_MODELCARD) {
