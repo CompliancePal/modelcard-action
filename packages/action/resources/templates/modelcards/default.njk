@@ -15,6 +15,7 @@ Date: {{ model_details.version.date | date }}
 No datasets found
 {% endfor %}
 
+{% if quantitative_analysis %}
 ### Quantitative analysis
 
 #### Performance metrics
@@ -24,3 +25,4 @@ No datasets found
 {% else %}
 No metrics found
 {% endfor %}
+{% endif %}

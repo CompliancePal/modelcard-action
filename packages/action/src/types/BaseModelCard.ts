@@ -235,7 +235,7 @@ export interface PerformanceMetric {
   /**
    * The value of the performance metric.
    */
-  value?: string;
+  value?: string | number;
   /**
    * The name of the slice this metric was computed on. By default, assume this metric is not sliced.
    */

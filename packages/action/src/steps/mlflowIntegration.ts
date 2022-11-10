@@ -18,7 +18,7 @@ export const augmentModelCard = async (modelcard: ExtendedModelCard) => {
         performance_metrics: details.run.data.metrics.map(
           (m): PerformanceMetric => ({
             type: m.key,
-            value: m.value.toString(),
+            value: m.value,
           }),
         ),
         graphics: {},

@@ -29,6 +29,7 @@
     "jest": "^28.1.1",
     "jest-presets": "*",
     "memfs": "^3.4.7",
+    "nock": "^13.2.9",
     "ts-jest": "^28.0.4",
     "tsconfig": "*",
     "typescript": "^4.8.4"
