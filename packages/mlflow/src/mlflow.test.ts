@@ -1,10 +1,6 @@
 import nock from 'nock';
-import {
-  addModelCardArtifact,
-  ExtendedModelCard,
-  getRunDetails,
-  Run,
-} from './mlflow';
+import { addModelCardArtifact, getRunDetails, Run } from './mlflow';
+import { ExtendedModelCard } from 'types';
 
 describe('mlflow', () => {
   const id = '2a84d204c6794965bc36641b46b77255';

@@ -1,20 +1,9 @@
 import { URL } from 'url';
 import fetch from 'cross-fetch';
-import { BaseModelCard } from 'types';
+import { ExtendedModelCard } from 'types';
 
 const USER_AGENT =
   'modelcard-action/1.0 (https://github.com/CompliancePal/modelcard-action)';
-
-interface RunIdInfo {
-  model_details: {
-    run: {
-      type: 'mflow';
-      id: string;
-    };
-  };
-}
-
-export type ExtendedModelCard = BaseModelCard & RunIdInfo;
 
 interface Metric {
   key: string;

@@ -1,5 +1,5 @@
 import nock from 'nock';
-import { ExtendedModelCard } from 'mlflow-integration';
+import { ExtendedModelCard } from 'types';
 import { augmentModelCard } from './mlflowIntegration';
 
 describe('mlflow', () => {
