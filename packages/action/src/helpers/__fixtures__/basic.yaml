@@ -1,10 +1,9 @@
 model_details:
   name: Facial Detection
   version:
-    id: 0.0.0
-    name: 0.0.abc
+    name: 0.0.0
     date: 2022-06-01
-  description: |
+  documentation: |
     <!-- markdown description of model -->
     # Face Detection
 

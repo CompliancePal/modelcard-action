@@ -1,0 +1,21 @@
+sequenceDiagram
+    autonumber
+    actor ds as Data Scientist
+    participant ts as MLflow
+    participant gh as GitHub
+    participant a as modelcard-action
+
+    loop Experiment
+        ds ->> ds: train
+        ds ->> ts: params, metrics, logs
+    end
+
+    ds ->> ds: selects winning<br>run_id experiment
+    ds ->> gh: commit 
+    gh ->> a: trigger
+
+    a ->> ts: get run_id experiment details
+    a ->> a: validation
+    a ->> ts: add modelcard.json artifact<br>to run_id experiment
+
+  

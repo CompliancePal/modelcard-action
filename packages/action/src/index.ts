@@ -3,7 +3,7 @@ import { join } from 'path';
 import * as core from '@actions/core';
 import 'dotenv/config';
 import { configureValidator } from './steps/configureValidator';
-import { BaseModelCard } from './types/BaseModelCard';
+import { BaseModelCard, ExtendedModelCard } from 'types';
 import {
   renderModelCardDefault,
   renderModelCardValidationSummary,
@@ -14,6 +14,7 @@ import {
   DiagnosticSeverity,
   RulesetValidationError,
 } from '@compliancepal/spectral-rulesets/dist/errors';
+import { augmentModelCard } from './steps/mlflowIntegration';
 
 const main = async () => {
   if (!process.env.INPUT_MODELCARD) {
@@ -22,6 +23,7 @@ const main = async () => {
 
   const validator = await configureValidator();
   core.info('Validator created');
+  core.debug(JSON.stringify(validator.ruleset, null, 2));
 
   const raw = fs.readFileSync(process.env.INPUT_MODELCARD, 'utf8');
   core.info('Model card file opened');
@@ -29,7 +31,11 @@ const main = async () => {
   const modelCard = await validator.validate<BaseModelCard>(raw);
   core.info('Model card validated');
 
-  await core.summary.addRaw(renderModelCardDefault(modelCard)).write();
+  const augmentedModelCard = await augmentModelCard(
+    modelCard as ExtendedModelCard,
+  );
+
+  await core.summary.addRaw(renderModelCardDefault(augmentedModelCard)).write();
   core.info('Model card rendered');
 };
 

@@ -1,0 +1,103 @@
+{
+  "request": {
+    "url": "/api/2.0/mlflow/runs/get",
+    "method": "GET",
+    "query": {
+      "run_id": "c7a582053362445caf9fbc7f9c57d93c"
+    }
+  },
+  "response": {
+    "run": {
+      "info": {
+        "run_uuid": "c7a582053362445caf9fbc7f9c57d93c",
+        "experiment_id": "0",
+        "run_name": "luxuriant-snail-406",
+        "user_id": "root",
+        "status": "FINISHED",
+        "start_time": 1667383203898,
+        "end_time": 1667383325729,
+        "artifact_uri": "mlflow-artifacts:/0/c7a582053362445caf9fbc7f9c57d93c/artifacts",
+        "lifecycle_stage": "active",
+        "run_id": "c7a582053362445caf9fbc7f9c57d93c"
+      },
+      "data": {
+        "metrics": [
+          {
+            "key": "mae",
+            "value": 0.6180564962340623,
+            "timestamp": 1667383254124,
+            "step": 0
+          },
+          {
+            "key": "r2",
+            "value": 0.18875426789198602,
+            "timestamp": 1667383253620,
+            "step": 0
+          },
+          {
+            "key": "rmse",
+            "value": 0.7925310321688754,
+            "timestamp": 1667383253100,
+            "step": 0
+          }
+        ],
+        "params": [
+          {
+            "key": "alpha",
+            "value": "0.44"
+          },
+          {
+            "key": "l1_ratio",
+            "value": "0.1"
+          }
+        ],
+        "tags": [
+          {
+            "key": "mlflow.gitRepoURL",
+            "value": "https://github.com/CompliancePal/mlflow-example.git"
+          },
+          {
+            "key": "mlflow.log-model.history",
+            "value": "[{\"run_id\": \"c7a582053362445caf9fbc7f9c57d93c\", \"artifact_path\": \"model\", \"utc_time_created\": \"2022-11-02 10:00:54.668327\", \"flavors\": {\"python_function\": {\"model_path\": \"model.pkl\", \"predict_fn\": \"predict\", \"loader_module\": \"mlflow.sklearn\", \"python_version\": \"3.10.6\", \"env\": \"conda.yaml\"}, \"sklearn\": {\"pickled_model\": \"model.pkl\", \"sklearn_version\": \"1.1.2\", \"serialization_format\": \"cloudpickle\", \"code\": null}}, \"model_uuid\": \"5d79e89d1c4542a2a34d1af302ea61a8\", \"mlflow_version\": \"1.30.0\"}]"
+          },
+          {
+            "key": "mlflow.project.backend",
+            "value": "local"
+          },
+          {
+            "key": "mlflow.project.entryPoint",
+            "value": "main"
+          },
+          {
+            "key": "mlflow.project.env",
+            "value": "conda"
+          },
+          {
+            "key": "mlflow.runName",
+            "value": "luxuriant-snail-406"
+          },
+          {
+            "key": "mlflow.source.git.commit",
+            "value": "4c35731ff8a2c744d790b97965748a07167d8da6"
+          },
+          {
+            "key": "mlflow.source.git.repoURL",
+            "value": "https://github.com/CompliancePal/mlflow-example.git"
+          },
+          {
+            "key": "mlflow.source.name",
+            "value": "file:///mlflow"
+          },
+          {
+            "key": "mlflow.source.type",
+            "value": "PROJECT"
+          },
+          {
+            "key": "mlflow.user",
+            "value": "root"
+          }
+        ]
+      }
+    }
+  }
+}

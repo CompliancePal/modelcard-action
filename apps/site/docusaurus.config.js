@@ -26,6 +26,15 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {
+        defer: 'true',
+        src: '/va/script.js',
+      },
+    },
+  ],
 
   presets: [
     [

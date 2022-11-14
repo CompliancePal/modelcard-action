@@ -1,0 +1,36 @@
+{
+  "name": "mlflow-integration",
+  "version": "1.0.0",
+  "description": "MLflow integration",
+  "main": "dist/index.js",
+  "dependencies": {
+    "cross-fetch": "^3.1.5"
+  },
+  "devDependencies": {
+    "jest": "^28.1.3",
+    "jest-presets": "*",
+    "nock": "^13.2.9",
+    "ts-jest": "^28.0.8",
+    "tsconfig": "*",
+    "types": "*",
+    "typescript": "^4.8.4"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "preset": "jest-presets/jest/node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CompliancePal/modelcard-action.git"
+  },
+  "author": "Vlad Știrbu",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/CompliancePal/modelcard-action/issues"
+  },
+  "homepage": "https://github.com/CompliancePal/modelcard-action#readme"
+}

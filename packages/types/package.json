@@ -1,0 +1,23 @@
+{
+  "name": "types",
+  "version": "1.0.0",
+  "description": "Common types",
+  "main": "dist/index.js",
+  "devDependencies": {
+    "tsconfig": "*",
+    "typescript": "^4.8.4"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CompliancePal/modelcard-action.git"
+  },
+  "author": "Vlad Știrbu",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/CompliancePal/modelcard-action/issues"
+  },
+  "homepage": "https://github.com/CompliancePal/modelcard-action#readme"
+}

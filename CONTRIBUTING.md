@@ -17,7 +17,9 @@ This is a monorepo. It contains `apps` and `packages` organized as [workspaces](
 | action       | The GitHub action                                                                        |
 | functions    | A set of functions that facilitate advanced rules for validation of model card documents |
 | jest-presets | Shared Jest presets                                                                      |
+| mlflow       | MLflow integration                                                                       |
 | rulesets     | Loads the custom rulesets                                                                |
+| types        | Common types                                                                             |
 | tsconfig     | Shared Typescript configurations                                                         |
 
 ## Development

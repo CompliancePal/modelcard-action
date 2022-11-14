@@ -72,7 +72,7 @@ export const getValidator: {
         )
       ) {
         throw new ModelCardValidationError(
-          'The model card is ot a valid YAML document',
+          'The model card is not a valid YAML document',
           'invalid-yaml',
         );
       }
