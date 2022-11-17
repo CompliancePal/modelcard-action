@@ -1,6 +1,9 @@
 ---
 title: MLflow
 description: Instructions for setting up the integration of model card integration with the MLflow tracking server
+tags:
+  - integration
+  - mlflow
 ---
 
 :::caution

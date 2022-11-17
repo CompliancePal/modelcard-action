@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import { join } from 'path';
 import * as core from '@actions/core';
 import 'dotenv/config';
+import * as Sentry from '@sentry/node';
 import { configureValidator } from './steps/configureValidator';
 import { BaseModelCard, ExtendedModelCard } from 'types';
 import {
@@ -15,6 +16,8 @@ import {
   RulesetValidationError,
 } from '@compliancepal/spectral-rulesets/dist/errors';
 import { augmentModelCard } from './steps/mlflowIntegration';
+
+Sentry.init();
 
 const main = async () => {
   if (!process.env.INPUT_MODELCARD) {
@@ -52,13 +55,11 @@ main().catch(async (error) => {
     });
 
     await core.summary.addRaw(renderRulesetValidationSummary(error)).write();
-  }
-
-  if (error instanceof ModelCardValidationError) {
+  } else if (error instanceof ModelCardValidationError) {
     error.annotations
       .map((annotation) => ({
         ...annotation,
-        file: process.env.INPUT_MODELCARD!,
+        file: process.env.INPUT_MODELCARD,
       }))
       .forEach((annotation) => {
         switch (annotation.severity) {
@@ -77,6 +78,10 @@ main().catch(async (error) => {
       });
 
     await core.summary.addRaw(renderModelCardValidationSummary(error)).write();
+  } else {
+    Sentry.captureException(error);
+
+    await Sentry.flush();
   }
 
   if (error instanceof Error) {
