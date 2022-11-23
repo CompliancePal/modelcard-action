@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Usage
 
-The **modelcard-action** is a GitHub Action. You can use use in your workflows together with any other actions. The following is a simple example:
+The **modelcard-action** is a GitHub Action. You can use use in your workflows together with any other actions. The following is an example:
 
 ```yaml title=".github/workflows/validate.yml"
 name: modelcard-test

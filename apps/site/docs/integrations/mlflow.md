@@ -1,6 +1,9 @@
 ---
 title: MLflow
 description: Instructions for setting up the integration of model card integration with the MLflow tracking server
+tags:
+  - integration
+  - mlflow
 ---
 
 :::caution
@@ -152,6 +155,7 @@ jobs:
       - name: Check for model card file
         uses: CompliancePal/modelcard-action@mlflow-action-experiments
         env:
+          # highlight-next-line
           MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
         with:
           modelcard: modelcard.yaml

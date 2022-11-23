@@ -40,6 +40,7 @@
   "dependencies": {
     "@actions/core": "^1.8.2",
     "@compliancepal/spectral-rulesets": "*",
+    "@sentry/node": "^7.20.0",
     "@stoplight/spectral-core": "^1.12.2",
     "ast-types": "^0.14.2",
     "dotenv": "^16.0.1",
