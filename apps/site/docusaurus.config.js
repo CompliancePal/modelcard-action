@@ -36,6 +36,11 @@ const config = {
     },
   ],
 
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
+
   presets: [
     [
       'classic',
@@ -49,7 +54,12 @@ const config = {
           // editUrl:
           //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-        blog: false,
+        blog: {
+          blogTitle: 'Modelcard-action blog',
+          showReadingTime: true,
+          blogSidebarTitle: 'All posts',
+          blogSidebarCount: 'ALL',
+        },
         // blog: {
         //   showReadingTime: true,
         //   // Please change this to your repo.
@@ -67,6 +77,13 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        {
+          name: 'keywords',
+          content:
+            'model cards, modelcards, xai, documentation, github action, experiments tracking, mlflow, ml, ai',
+        },
+      ],
       announcementBar: {
         id: 'support_us',
         content:
@@ -87,7 +104,7 @@ const config = {
           //   position: 'left',
           //   label: 'Tutorial',
           // },
-          // { to: '/blog', label: 'Blog', position: 'left' },
+          { to: '/blog', label: 'Blog', position: 'right' },
           {
             href: 'https://github.com/CompliancePal/modelcard-action',
             label: 'GitHub',
@@ -138,11 +155,14 @@ const config = {
         //     ],
         //   },
         // ],
-        copyright: `Copyright © ${new Date().getFullYear()} CompliancePal. Built with <a href="https://docusaurus.io">Docusaurus</a>.`,
+        copyright: `Copyright © ${new Date().getFullYear()} <a href="https://www.compliancepal.eu">CompliancePal</a>. Built with <a href="https://docusaurus.io">Docusaurus</a>.`,
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+      },
+      mermaid: {
+        theme: { light: 'neutral', dark: 'forest' },
       },
     }),
 };
