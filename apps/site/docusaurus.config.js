@@ -54,12 +54,13 @@ const config = {
           // editUrl:
           //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-        blog: {
-          blogTitle: 'Modelcard-action blog',
-          showReadingTime: true,
-          blogSidebarTitle: 'All posts',
-          blogSidebarCount: 'ALL',
-        },
+        blog: false,
+        // blog: {
+        //   blogTitle: 'Modelcard-action blog',
+        //   showReadingTime: true,
+        //   blogSidebarTitle: 'All posts',
+        //   blogSidebarCount: 'ALL',
+        // },
         // blog: {
         //   showReadingTime: true,
         //   // Please change this to your repo.
@@ -104,7 +105,7 @@ const config = {
           //   position: 'left',
           //   label: 'Tutorial',
           // },
-          { to: '/blog', label: 'Blog', position: 'right' },
+          // { to: '/blog', label: 'Blog', position: 'right' },
           {
             href: 'https://github.com/CompliancePal/modelcard-action',
             label: 'GitHub',
