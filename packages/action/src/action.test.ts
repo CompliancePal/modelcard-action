@@ -8,7 +8,9 @@ describe('action', () => {
     INPUT_MODELCARD: 'src/helpers/__fixtures__/basic.yaml',
     INPUT_DISABLE_DEFAULT_RULES: undefined,
     GITHUB_WORKSPACE: undefined,
-    INPUT_RULES: 'src/steps/__fixtures__',
+    INPUT_RULES: `${
+      process.env.CI ? 'packages/action/' : ''
+    }src/steps/__fixtures__`,
     //@ts-ignore
     GITHUB_STEP_SUMMARY,
   };
