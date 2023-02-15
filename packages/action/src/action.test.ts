@@ -27,7 +27,9 @@ describe('action', () => {
 
   afterAll(() => {
     for (let key in env) {
-      delete process.env[key];
+      if (env[key as keyof ProcessEnvType]) {
+        delete process.env[key as keyof ProcessEnvType];
+      }
     }
 
     unlinkSync(GITHUB_STEP_SUMMARY);
