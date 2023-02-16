@@ -1,0 +1,48 @@
+{
+  "name": "@compliancepal/modelcard-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "dev": "tsc -w",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CompliancePal/modelcard-action.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/CompliancePal/modelcard-action/issues"
+  },
+  "homepage": "https://github.com/CompliancePal/modelcard-action#readme",
+  "devDependencies": {
+    "@types/jest": "^28.1.1",
+    "@types/js-yaml": "^4.0.5",
+    "@types/node": "^18.11.2",
+    "@types/node-fetch": "^2.6.2",
+    "@types/nunjucks": "^3.2.1",
+    "jest": "^28.1.1",
+    "jest-presets": "*",
+    "memfs": "^3.4.7",
+    "ts-jest": "^28.0.4",
+    "tsconfig": "*",
+    "types": "*",
+    "typescript": "^4.8.4"
+  },
+  "jest": {
+    "preset": "jest-presets/jest/node"
+  },
+  "dependencies": {
+    "@compliancepal/spectral-rulesets": "*",
+    "@stoplight/spectral-core": "^1.12.2",
+    "ast-types": "^0.14.2",
+    "js-yaml": "^4.1.0",
+    "markdownlint": "^0.25.1",
+    "mlflow-integration": "*"
+  }
+}

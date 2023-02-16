@@ -1,0 +1,24 @@
+model_details:
+  name: Facial Detection
+  version:
+    name: 0.0.0
+    date: 2022-06-01
+  documentation: |
+    <!-- markdown description of model -->
+    # Face Detection
+
+    The model analyzed in this card detects one or more faces within an image or a video frame, and returns a box around each face along with the location of the faces' major landmarks. The model's goal is exclusively to identify the existence and location of faces in an image. It does not attempt to discover identities or demographics.
+model_parameters:
+  data:
+    - name: training
+      description: |
+        # Descr
+
+        No further description provided
+    - name: testing
+      description: |
+        # Descr
+
+        No further description provided
+  performance_metrics:
+    - raw: https://modelcards.withgoogle.com/assets/files/Face_Detection_Model-Card-all_chart_data.tsv

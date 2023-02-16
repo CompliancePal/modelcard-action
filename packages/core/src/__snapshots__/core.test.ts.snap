@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core validates model card with custom rules 1`] = `
+Object {
+  "model_details": Object {
+    "documentation": "<!-- markdown description of model -->
+# Face Detection
+
+The model analyzed in this card detects one or more faces within an image or a video frame, and returns a box around each face along with the location of the faces' major landmarks. The model's goal is exclusively to identify the existence and location of faces in an image. It does not attempt to discover identities or demographics.
+",
+    "name": "Facial Detection",
+    "version": Object {
+      "date": "2022-06-01",
+      "name": "0.0.0",
+    },
+  },
+  "model_parameters": Object {
+    "data": Array [
+      Object {
+        "description": "# Descr
+
+No further description provided
+",
+        "name": "training",
+      },
+      Object {
+        "description": "# Descr
+
+No further description provided
+",
+        "name": "testing",
+      },
+    ],
+    "performance_metrics": Array [
+      Object {
+        "raw": "https://modelcards.withgoogle.com/assets/files/Face_Detection_Model-Card-all_chart_data.tsv",
+      },
+    ],
+  },
+}
+`;

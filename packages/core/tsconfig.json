@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "rootDir": "src",
+    "outDir": "dist",
+  },
+  "extends": "tsconfig/base.json",
+  "exclude": ["**/*.test.ts", "dist"]
+}
