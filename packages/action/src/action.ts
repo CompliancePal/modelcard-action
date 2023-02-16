@@ -3,20 +3,18 @@ import { join } from 'path';
 import * as core from '@actions/core';
 import 'dotenv/config';
 import * as Sentry from '@sentry/node';
-import { configureValidator } from './steps/configureValidator';
-import { BaseModelCard, ExtendedModelCard } from 'types';
 import {
   renderModelCardDefault,
   renderModelCardValidationSummary,
   renderRulesetValidationSummary,
 } from './helpers/templates';
-import { ModelCardValidationError } from '@compliancepal/spectral-rulesets';
 import {
-  DiagnosticSeverity,
+  ModelCardValidationError,
   RulesetValidationError,
-} from '@compliancepal/spectral-rulesets/dist/errors';
-import { augmentModelCard } from './steps/mlflowIntegration';
+} from '@compliancepal/spectral-rulesets';
+import { DiagnosticSeverity } from '@compliancepal/spectral-rulesets/dist/errors';
 import { z } from 'zod';
+import { main } from '@compliancepal/modelcard-core';
 
 Sentry.init();
 
@@ -44,28 +42,6 @@ const envSchema = z.object({
 });
 
 export type ProcessEnvType = z.infer<typeof envSchema>;
-
-const main = async (opts: {
-  absCustomRulesFilepath?: string;
-  disableDefaultRules: boolean;
-  modelCard: string;
-}) => {
-  const validator = await configureValidator(opts);
-  core.info('Validator created');
-  core.debug(JSON.stringify(validator.ruleset, null, 2));
-
-  const modelCard = await validator.validate<BaseModelCard>(opts.modelCard);
-  core.info('Model card validated');
-
-  const augmentedModelCard = await augmentModelCard(
-    modelCard as ExtendedModelCard,
-  );
-
-  // await core.summary.addRaw(renderModelCardDefault(augmentedModelCard)).write();
-  // core.info('Model card rendered');
-
-  return augmentedModelCard;
-};
 
 export const action = async () => {
   const env = envSchema.safeParse(process.env);

@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@actions/core": "^1.8.2",
+    "@compliancepal/modelcard-core": "*",
     "@compliancepal/spectral-rulesets": "*",
     "@sentry/node": "^7.20.0",
     "@stoplight/spectral-core": "^1.12.2",

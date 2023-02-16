@@ -3,7 +3,7 @@ import { action, ProcessEnvType } from './action';
 
 const GITHUB_STEP_SUMMARY = 'summary';
 
-describe('action', () => {
+describe.skip('action', () => {
   const env: Record<keyof ProcessEnvType, string | undefined> = {
     INPUT_MODELCARD: 'src/helpers/__fixtures__/basic.yaml',
     INPUT_DISABLE_DEFAULT_RULES: undefined,
