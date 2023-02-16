@@ -1,4 +1,3 @@
-import * as core from '@actions/core';
 import { configureValidator } from './steps/configureValidator';
 import { BaseModelCard, ExtendedModelCard } from 'types';
 import { augmentModelCard } from './steps/mlflowIntegration';
@@ -15,15 +14,18 @@ export type MainProps = {
   disableDefaultRules: boolean;
   modelCard: string;
   plugins: MLflowPluginOptions[];
+  logger: Pick<Console, 'info' | 'debug'>;
 };
 
 export const main = async (opts: MainProps) => {
+  const { logger } = opts;
+
   const validator = await configureValidator(opts);
-  core.info('Validator created');
-  core.debug(JSON.stringify(validator.ruleset, null, 2));
+  logger.info('Validator created');
+  logger.debug(JSON.stringify(validator.ruleset, null, 2));
 
   const modelCard = await validator.validate<BaseModelCard>(opts.modelCard);
-  core.info('Model card validated');
+  logger.info('Model card validated');
 
   const augmentedModelCard = await augmentModelCard(
     modelCard as ExtendedModelCard,

@@ -14,6 +14,7 @@ describe('core', () => {
       disableDefaultRules: false,
       absCustomRulesFilepath: join(__dirname, 'steps/__fixtures__/rules.yaml'),
       plugins: [],
+      logger: console,
     };
 
     expect(await main(cfg)).toMatchSnapshot();

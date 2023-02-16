@@ -76,6 +76,7 @@ export const action = async () => {
     disableDefaultRules: env.data.INPUT_DISABLE_DEFAULT_RULES,
     modelCard: env.data.INPUT_MODELCARD,
     plugins,
+    logger: core,
   })
     .then(async (modelCard) => {
       await core.summary.addRaw(renderModelCardDefault(modelCard)).write();
