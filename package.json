@@ -21,6 +21,7 @@
   "homepage": "https://github.com/CompliancePal/modelcard-action#readme",
   "workspaces": [
     "apps/site",
+    "apps/nextjs",
     "packages/*"
   ],
   "devDependencies": {

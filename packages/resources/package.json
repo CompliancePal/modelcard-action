@@ -1,0 +1,18 @@
+{
+  "name": "resources",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CompliancePal/modelcard-action.git"
+  },
+  "author": "Vlad Știrbu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CompliancePal/modelcard-action/issues"
+  },
+  "homepage": "https://github.com/CompliancePal/modelcard-action#readme"
+}

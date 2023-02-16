@@ -1,0 +1,33 @@
+{
+  "name": "nextjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@compliancepal/modelcard-core": "^1.0.0",
+    "next": "^13.1.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CompliancePal/modelcard-action.git"
+  },
+  "author": "Vlad Știrbu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CompliancePal/modelcard-action/issues"
+  },
+  "homepage": "https://github.com/CompliancePal/modelcard-action#readme",
+  "devDependencies": {
+    "@types/node": "^18.13.0",
+    "@types/react": "^18.0.28"
+  }
+}

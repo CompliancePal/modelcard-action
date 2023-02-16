@@ -18,6 +18,7 @@
     "@stoplight/spectral-rulesets": "^1.14.1",
     "@stoplight/spectral-runtime": "^1.1.2",
     "@stoplight/yaml": "^4.2.3",
+    "resources": "^1.0.0",
     "rollup": "^2.79.1"
   },
   "devDependencies": {
