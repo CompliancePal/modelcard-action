@@ -16,14 +16,10 @@ describe('mlflow', () => {
   };
 
   beforeEach(() => {
-    process.env.MLFLOW_TRACKING_URI = MLFLOW_TRACKING_URI;
-
     nock.disableNetConnect();
   });
 
   afterEach(() => {
-    process.env.MLFLOW_TRACKING_URI;
-
     nock.enableNetConnect();
   });
 
@@ -39,7 +35,7 @@ describe('mlflow', () => {
         },
       });
 
-    const details = await getRunDetails(mc);
+    const details = await getRunDetails(mc, MLFLOW_TRACKING_URI);
 
     expect(details).toMatchObject({
       run: {
@@ -80,7 +76,7 @@ describe('mlflow', () => {
       },
     };
 
-    const res = await addModelCardArtifact(details, mc);
+    const res = await addModelCardArtifact(details, mc, MLFLOW_TRACKING_URI);
 
     expect(res).toMatchObject({
       ok: true,

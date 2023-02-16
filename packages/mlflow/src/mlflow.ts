@@ -38,7 +38,7 @@ export interface Run {
   };
 }
 
-const getUrl = (path: string) => new URL(path, process.env.MLFLOW_TRACKING_URI);
+const getUrl = (path: string, baseUrl: string) => new URL(path, baseUrl);
 
 const resolveArtifact = (details: Run, path: string) =>
   `${details.run.info.artifact_uri.replace(
@@ -46,8 +46,11 @@ const resolveArtifact = (details: Run, path: string) =>
     '/api/2.0/mlflow-artifacts/artifacts',
   )}/${path}`;
 
-export const getRunDetails = (modelcard: ExtendedModelCard): Promise<Run> => {
-  const url = getUrl('/api/2.0/mlflow/runs/get');
+export const getRunDetails = (
+  modelcard: ExtendedModelCard,
+  baseUrl: string,
+): Promise<Run> => {
+  const url = getUrl('/api/2.0/mlflow/runs/get', baseUrl);
 
   url.searchParams.append('run_id', modelcard.model_details.run.id);
 
@@ -63,8 +66,9 @@ export const getRunDetails = (modelcard: ExtendedModelCard): Promise<Run> => {
 export const addModelCardArtifact = (
   details: Run,
   modelcard: ExtendedModelCard,
+  baseUrl: string,
 ) => {
-  const url = getUrl(resolveArtifact(details, 'modelcard.json'));
+  const url = getUrl(resolveArtifact(details, 'modelcard.json'), baseUrl);
 
   return fetch(url, {
     method: 'PUT',
