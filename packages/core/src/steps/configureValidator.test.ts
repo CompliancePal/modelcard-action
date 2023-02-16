@@ -4,7 +4,7 @@ import { configureValidator } from './configureValidator';
 describe('custom rules', () => {
   it('loads successfuly', async () => {
     const absCustomRulesFilepath = `${
-      process.env.CI ? 'packages/action/' : ''
+      process.env.CI ? 'packages/core/' : ''
     }src/steps/__fixtures__/rules.yaml`;
     const validator = await configureValidator({
       absCustomRulesFilepath,
