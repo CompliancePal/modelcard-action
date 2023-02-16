@@ -1,12 +1,17 @@
 import { addModelCardArtifact, getRunDetails } from 'mlflow-integration';
 import { PerformanceMetric, ExtendedModelCard } from 'types';
 
-export const augmentModelCard = async (modelcard: ExtendedModelCard) => {
-  if (!process.env.MLFLOW_TRACKING_URI || !modelcard.model_details?.run?.id) {
+export const augmentModelCard = async (
+  modelcard: ExtendedModelCard,
+  options?: {
+    trackingUrl: string;
+  },
+) => {
+  if (!options?.trackingUrl || !modelcard.model_details?.run?.id) {
     return modelcard;
   }
 
-  const details = await getRunDetails(modelcard);
+  const details = await getRunDetails(modelcard, options.trackingUrl);
 
   if (details.run.data.metrics.length > 0) {
     if (modelcard.quantitative_analysis === undefined) {
@@ -22,7 +27,7 @@ export const augmentModelCard = async (modelcard: ExtendedModelCard) => {
     }
   }
 
-  await addModelCardArtifact(details, modelcard);
+  await addModelCardArtifact(details, modelcard, options.trackingUrl);
 
   return modelcard;
 };

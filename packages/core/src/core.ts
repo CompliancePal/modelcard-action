@@ -3,10 +3,18 @@ import { configureValidator } from './steps/configureValidator';
 import { BaseModelCard, ExtendedModelCard } from 'types';
 import { augmentModelCard } from './steps/mlflowIntegration';
 
+export interface MLflowPluginOptions {
+  type: 'mlflow';
+  options: {
+    trackingUrl: string;
+  };
+}
+
 export type MainProps = {
   absCustomRulesFilepath?: string;
   disableDefaultRules: boolean;
   modelCard: string;
+  plugins: MLflowPluginOptions[];
 };
 
 export const main = async (opts: MainProps) => {
@@ -19,6 +27,7 @@ export const main = async (opts: MainProps) => {
 
   const augmentedModelCard = await augmentModelCard(
     modelCard as ExtendedModelCard,
+    opts.plugins.find((plugin) => plugin.type === 'mlflow')?.options,
   );
 
   return augmentedModelCard;

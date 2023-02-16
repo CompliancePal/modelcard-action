@@ -13,6 +13,7 @@ describe('core', () => {
       modelCard,
       disableDefaultRules: false,
       absCustomRulesFilepath: join(__dirname, 'steps/__fixtures__/rules.yaml'),
+      plugins: [],
     };
 
     expect(await main(cfg)).toMatchSnapshot();

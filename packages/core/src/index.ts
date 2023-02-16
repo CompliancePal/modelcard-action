@@ -1,1 +1,1 @@
-export { main } from './core';
+export { main, MLflowPluginOptions } from './core';

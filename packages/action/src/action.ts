@@ -14,7 +14,7 @@ import {
 } from '@compliancepal/spectral-rulesets';
 import { DiagnosticSeverity } from '@compliancepal/spectral-rulesets/dist/errors';
 import { z } from 'zod';
-import { main } from '@compliancepal/modelcard-core';
+import { main, MLflowPluginOptions } from '@compliancepal/modelcard-core';
 
 Sentry.init();
 
@@ -39,6 +39,8 @@ const envSchema = z.object({
     .string()
     .optional()
     .transform((val) => val || process.cwd()),
+
+  MLFLOW_TRACKING_URI: z.string().url().optional(),
 });
 
 export type ProcessEnvType = z.infer<typeof envSchema>;
@@ -58,10 +60,22 @@ export const action = async () => {
     env.data.INPUT_RULES &&
     join(projectRoot, env.data.INPUT_RULES, 'rules.yaml');
 
+  const plugins: MLflowPluginOptions[] = [];
+
+  if (env.data.MLFLOW_TRACKING_URI) {
+    plugins.push({
+      type: 'mlflow',
+      options: {
+        trackingUrl: env.data.MLFLOW_TRACKING_URI,
+      },
+    });
+  }
+
   return main({
     absCustomRulesFilepath,
     disableDefaultRules: env.data.INPUT_DISABLE_DEFAULT_RULES,
     modelCard: env.data.INPUT_MODELCARD,
+    plugins,
   })
     .then(async (modelCard) => {
       await core.summary.addRaw(renderModelCardDefault(modelCard)).write();
@@ -70,13 +84,8 @@ export const action = async () => {
       return modelCard;
     })
     .catch(async (error) => {
-      console.log(error);
-
       if (error instanceof RulesetValidationError) {
-        const customRulesFilepath = join(
-          process.env.INPUT_RULES!,
-          'rules.yaml',
-        );
+        const customRulesFilepath = join(env.data.INPUT_RULES!, 'rules.yaml');
         core.info(`problems in file ${customRulesFilepath}`);
 
         error.annotations.forEach((annotation) => {
@@ -96,7 +105,7 @@ export const action = async () => {
         error.annotations
           .map((annotation) => ({
             ...annotation,
-            file: process.env.INPUT_MODELCARD,
+            file: env.data.INPUT_MODELCARD,
           }))
           .forEach((annotation) => {
             switch (annotation.severity) {

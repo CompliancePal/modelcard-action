@@ -16,14 +16,10 @@ describe('mlflow', () => {
   };
 
   beforeEach(() => {
-    process.env.MLFLOW_TRACKING_URI = MLFLOW_TRACKING_URI;
-
     nock.disableNetConnect();
   });
 
   afterEach(() => {
-    process.env.MLFLOW_TRACKING_URI;
-
     nock.enableNetConnect();
   });
 
@@ -53,7 +49,9 @@ describe('mlflow', () => {
       )
       .reply(201);
 
-    const result = await augmentModelCard(mc);
+    const result = await augmentModelCard(mc, {
+      trackingUrl: MLFLOW_TRACKING_URI,
+    });
 
     expect(result).toMatchObject({
       ...mc,
