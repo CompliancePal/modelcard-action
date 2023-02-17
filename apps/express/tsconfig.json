@@ -3,6 +3,8 @@
     "lib": ["ES2022"],
     "rootDir": "src",
     "outDir": "dist",
+    "declaration": false,
+    "declarationMap": false,
   },
   "extends": "tsconfig/base.json",
   "exclude": ["**/*.test.ts", "dist"]

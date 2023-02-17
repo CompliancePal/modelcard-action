@@ -1,5 +1,5 @@
 {
-  "name": "express",
+  "name": "api",
   "version": "1.0.0",
   "description": "Simple API for exposing the model card validation over http api",
   "main": "dist/index.js",
@@ -22,6 +22,7 @@
     "express": "^4.18.2"
   },
   "devDependencies": {
+    "@types/express": "^4.17.17",
     "tsconfig": "^*",
     "typescript": "^4.9.5"
   }
