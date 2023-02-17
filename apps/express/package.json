@@ -1,0 +1,28 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "Simple API for exposing the model card validation over http api",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CompliancePal/modelcard-action.git"
+  },
+  "author": "Vlad Știrbu",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/CompliancePal/modelcard-action/issues"
+  },
+  "homepage": "https://github.com/CompliancePal/modelcard-action#readme",
+  "dependencies": {
+    "@compliancepal/modelcard-core": "^1.0.0",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "tsconfig": "^*",
+    "typescript": "^4.9.5"
+  }
+}

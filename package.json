@@ -21,7 +21,8 @@
   "homepage": "https://github.com/CompliancePal/modelcard-action#readme",
   "workspaces": [
     "apps/site",
-    "packages/*"
+    "packages/*",
+    "apps/express"
   ],
   "devDependencies": {
     "rimraf": "^3.0.2",
