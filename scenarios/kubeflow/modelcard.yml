@@ -1,0 +1,5 @@
+model_details:
+  name: Wine prediction
+  version:
+    name: 1.0.0
+    date: 2022-11-03

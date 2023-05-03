@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "rootDir": "src",
+    "outDir": "dist",
+    "resolveJsonModule": true
+  },
+  "extends": "tsconfig/base.json",
+  "exclude": ["**/*.test.ts", "dist"]
+}
