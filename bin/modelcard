@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+const program = require('kubeflow').default;
+
+program.parse(process.argv);

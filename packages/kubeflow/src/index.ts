@@ -13,10 +13,10 @@ const optsSchema = z.object({
 
 const program = new Command();
 
-program.name('modelcard-kubeflow').version(process.env.npm_package_version!);
+program.name('modelcard').version(process.env.npm_package_version!);
 
 program
-  .command('mlflow')
+  .command('kubeflow')
   .requiredOption('--run-id <run-id>', 'MLflow run ID')
   .requiredOption('--tracking-uri <tracking-uri>', 'MLflow tracking URI')
   .requiredOption('--modelcard <modelcard>', 'Model card path')

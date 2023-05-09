@@ -25,7 +25,7 @@
     "jest-presets": "*",
     "ts-jest": "^28.0.4",
     "tsconfig": "*",
-    "type": "*",
+    "types": "*",
     "typescript": "^4.8.4"
   },
   "dependencies": {
