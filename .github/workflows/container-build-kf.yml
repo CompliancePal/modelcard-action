@@ -47,6 +47,4 @@ jobs:
           context: .
           file: Dockerfile.kf
           push: true
-          tags: compliancepal/mc-kf:latest
-          # tags: ${{ steps.meta.outputs.tags }}
-          # labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/mc-kf:latest
