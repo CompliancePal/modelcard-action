@@ -1,5 +1,5 @@
 import nock from 'nock';
-import { ExtendedModelCard } from 'types';
+import { ExperimentTrackingType, ExtendedModelCard } from 'types';
 import { augmentModelCard } from './mlflowIntegration';
 
 describe('mlflow', () => {
@@ -9,7 +9,7 @@ describe('mlflow', () => {
   const mc: ExtendedModelCard = {
     model_details: {
       run: {
-        type: 'mflow',
+        type: ExperimentTrackingType.MLFLOW,
         id,
       },
     },
@@ -38,6 +38,7 @@ describe('mlflow', () => {
           },
           info: {
             artifact_uri: `mlflow-artifacts:/0/${id}/artifacts`,
+            experiment_id: '0',
             run_id: id,
           },
         },

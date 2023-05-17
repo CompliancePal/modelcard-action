@@ -1,6 +1,6 @@
 import nock from 'nock';
 import { addModelCardArtifact, getRunDetails, Run } from './mlflow';
-import { ExtendedModelCard } from 'types';
+import { ExperimentTrackingType, ExtendedModelCard } from 'types';
 
 describe('mlflow', () => {
   const id = '2a84d204c6794965bc36641b46b77255';
@@ -9,7 +9,7 @@ describe('mlflow', () => {
   const mc: ExtendedModelCard = {
     model_details: {
       run: {
-        type: 'mflow',
+        type: ExperimentTrackingType.MLFLOW,
         id,
       },
     },
