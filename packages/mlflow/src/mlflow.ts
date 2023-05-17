@@ -40,11 +40,27 @@ export interface Run {
 
 const getUrl = (path: string, baseUrl: string) => new URL(path, baseUrl);
 
-const resolveArtifact = (details: Run, path: string) =>
-  `${details.run.info.artifact_uri.replace(
-    'mlflow-artifacts:',
-    '/api/2.0/mlflow-artifacts/artifacts',
-  )}/${path}`;
+const resolveArtifact = (details: Run, path: string) => {
+  return `/api/2.0/mlflow-artifacts/artifacts/${details.run.info.experiment_id}/${details.run.info.run_id}/artifacts/${path}`;
+
+  // if (details.run.info.artifact_uri.startsWith('mlflow-artifacts:')) {
+  //   console.log('mlflow-artifacts');
+
+  //   return `${details.run.info.artifact_uri.replace(
+  //     'mlflow-artifacts:',
+  //     '/api/2.0/mlflow-artifacts/artifacts',
+  //   )}/${path}`;
+  // }
+
+  // if (details.run.info.artifact_uri.startsWith('s3:')) {
+  //   return `${details.run.info.artifact_uri.replace(
+  //     's3://mlflow',
+  //     '/api/2.0/mlflow-artifacts/artifacts',
+  //   )}/${path}`;
+  // }
+
+  // throw new Error('unknown protocol');
+};
 
 export const getRunDetails = (
   modelcard: ExtendedModelCard,
