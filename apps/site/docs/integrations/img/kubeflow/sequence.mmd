@@ -1,0 +1,21 @@
+sequenceDiagram
+  autonumber
+  actor Data Scientist
+  participant kf as Kubeflow
+  participant mc as ModelCard Validation
+  participant mlflow as MLflow
+
+  Data Scientist ->> Data Scientist: create pipeline 
+  Data Scientist ->> kf: deploy
+  activate kf
+    Note over kf: Training steps where run_id is created
+    kf ->> mc: trigger
+    activate mc
+      mc ->> mlflow: get run_id experiment details
+      mc ->> mc: validate
+      mc ->> mlflow: add modelcard.json artefact <br /> to run_id experiment
+      mc -->> kf: output modelcard <br /> as markdown
+    deactivate mc
+    Note over kf: More steps
+    kf -->> Data Scientist: 
+  deactivate kf

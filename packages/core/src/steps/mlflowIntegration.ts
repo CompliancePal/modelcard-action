@@ -27,7 +27,17 @@ export const augmentModelCard = async (
     }
   }
 
-  await addModelCardArtifact(details, modelcard, options.trackingUrl);
+  const res = await addModelCardArtifact(
+    details,
+    modelcard,
+    options.trackingUrl,
+  );
+
+  if (res.status === 200) {
+    console.log('Model card artifact added to MLflow run');
+  } else {
+    console.error('Failed to add model card artifact to MLflow run');
+  }
 
   return modelcard;
 };

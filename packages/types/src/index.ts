@@ -1,2 +1,2 @@
 export { BaseModelCard, PerformanceMetric } from './BaseModelCard';
-export { ExtendedModelCard } from './ExtendedModelCard';
+export { ExtendedModelCard, ExperimentTrackingType } from './ExtendedModelCard';
