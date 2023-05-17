@@ -47,4 +47,4 @@ jobs:
           context: .
           file: Dockerfile.kf
           push: true
-          tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/mc-kf:latest
+          tags: ${{ env.REGISTRY }}/compliancepal/mc-kf:latest
