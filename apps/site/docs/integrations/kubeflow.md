@@ -22,7 +22,15 @@ The integration relies on the [MLflow Tracking Server](https://www.mlflow.org/do
 
 ## Integration
 
-### Prerequisites
+### Modelcard CLI container
+
+The integration is provided as a CLI tool in a container image. The container image is available on GitHub Container Registry:
+
+```
+ghcr.io/compliancepal/mc-kf:latest
+```
+
+### Container component
 
 The integration needs [Kubeflow Pipelines SDK v2](https://www.kubeflow.org/docs/components/pipelines/v2/):
 
@@ -30,7 +38,7 @@ The integration needs [Kubeflow Pipelines SDK v2](https://www.kubeflow.org/docs/
 pip install --pre kfp~=2.0.0b1
 ```
 
-### Define the Kubeflow component
+Define the container component as a Python function, using the Pipelines SDK:
 
 ```python
 from kfp import dsl
@@ -38,7 +46,7 @@ from kfp import dsl
 @dsl.container_component
 def modelcard(run_id: str, tracking_uri: str, modelcard: dsl.InputPath(str)):
     return dsl.ContainerSpec(
-        image="vstirbu/modelcard:latest",
+        image="ghcr.io/compliancepal/mc-kf:latest",
         command=["modelcard", "kubeflow"],
         args=[
             "--run-id",
@@ -51,7 +59,43 @@ def modelcard(run_id: str, tracking_uri: str, modelcard: dsl.InputPath(str)):
     )
 ```
 
-### Define the Kubeflow pipeline
+### YAML component
+
+Define the `Modelcard` component in a YAML file:
+
+```yaml
+name: Modelcard
+
+description: Fills the model card template with experiment data from MLflow
+
+inputs:
+  - name: tracking_uri
+    type: String
+    description: MLFlow tracking uri where the training session will be saved
+  - name: run-id
+    type: String
+    descripiton: MLflow experiment run id
+  - name: modelcard
+    type: LocalPath
+    description: Path to the modelcard template file to be expanded with the experiment metadata
+
+implementation:
+  container:
+    image:
+    command:
+      [
+        'modelcard',
+        'kubeflow',
+        '--run-id',
+        { InputValue: run-id },
+        '--tracking-uri',
+        { InputValue: tracking_uri },
+        '--modelcard',
+        { InputPath: modelcard },
+      ]
+```
+
+<!-- ### Define the Kubeflow pipeline
 
 ```python
 @dsl.pipeline(
@@ -73,4 +117,4 @@ def pipeline(
         tracking_uri=mlflow_tracking_uri,
         modelcard="templates/modelcard.yaml"
     )
-```
+``` -->
