@@ -87,11 +87,11 @@ implementation:
         'modelcard',
         'kubeflow',
         '--run-id',
-        { InputValue: run-id },
+        { inputValue: run-id },
         '--tracking-uri',
-        { InputValue: tracking_uri },
+        { inputValue: tracking_uri },
         '--modelcard',
-        { InputPath: modelcard },
+        { inputPath: modelcard },
       ]
 ```
 
